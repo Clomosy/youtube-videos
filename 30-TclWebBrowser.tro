@@ -1,0 +1,43 @@
+Var
+  MyForm:TclForm;
+  xWeb : TclWebBrowser;
+  backBtn, forwardBtn : TclButton;
+  xLyt : TclLayout;
+
+void GoForwardClick;
+{
+  xWeb.goForward;
+}
+
+void GoBackClick;
+{
+  if (xWeb.CanGoBack)
+    ShowMessage('Önceli sayfaya yönlendiriliyorsunuz');
+  else
+    ShowMessage('Yönlendirilecek sayfa bulunamadı');
+  xWeb.goBack;
+}
+
+{
+  MyForm = TclForm.Create(Self);
+  
+  xWeb = MyForm.AddNewWebBrowser(MyForm, 'xWeb');
+  xWeb.Align = alClient;
+  xWeb.Navigate('www.google.com');
+  
+  xLyt = MyForm.AddNewLayout(MyForm, 'xLyt');
+  xLyt.Align = alTop;
+  xLyt.Height = 45;
+  
+  backBtn = MyForm.AddNewButton(xLyt, 'backBtn', 'goBack');
+  backBtn.Align = alLeft;
+  backBtn.Width = 70;
+  MyForm.AddNewEvent(backBtn, tbeOnClick, 'GoBackClick');
+  
+  forwardBtn = MyForm.AddNewButton(xLyt, 'forwardBtn', 'goForward');
+  forwardBtn.Align = alLeft;
+  forwardBtn.Width = 70;
+  MyForm.AddNewEvent(forwardBtn, tbeOnClick, 'GoForwardClick');
+  
+  MyForm.Run;
+}

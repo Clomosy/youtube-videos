@@ -1,0 +1,24 @@
+var   
+  MyForm:TclForm;
+  testListView : TClListView;
+
+void onItemClicked;
+{
+  ShowMessage(testListView.clSelectedItemData('MAIN_TEXT'));
+}
+{
+  MyForm = TclForm.Create(Self);
+  
+  testListView = MyForm.AddNewListView(MyForm,'testListView');
+  testListView.Align = alClient;
+  MyForm.AddNewEvent(testListView,tbeOnItemClick,'onItemClicked');
+  
+  testListView.clLoadListViewDataFromDataset(Clomosy.ClDataSetFromJSON('[
+  {"MAIN_TEXT":"deneme","FOOTER_TEXT":20},
+  {"MAIN_TEXT":"deneme2","FOOTER_TEXT":20},
+  {"MAIN_TEXT":"deneme3","FOOTER_TEXT":20},
+  {"MAIN_TEXT":"deneme4","FOOTER_TEXT":20}
+  ]'));
+  
+  MyForm.Run;
+}

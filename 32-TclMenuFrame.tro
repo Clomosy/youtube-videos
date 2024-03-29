@@ -1,0 +1,52 @@
+var
+  MyForm : TclForm;
+  TstSideMenu : TclMenuFrame;
+  showBtn, hideBtn : TclProButton;
+
+void ShowMenuFrame;
+{
+  TstSideMenu.Visible = True;
+  clRTMethod(TstSideMenu, 'BringToFront');
+}
+
+void HideMenuFrame;
+{
+  TstSideMenu.Visible = False;
+  clRTMethod(showBtn, 'BringToFront');
+}
+
+{
+  MyForm = TclForm.Create(Self)
+  
+  TstSideMenu = MyForm.AddNewMenuFrame(MyForm,'TstSideMenu');
+  TstSideMenu.Align = alContents;
+  TstSideMenu.Margins.Top = 50;
+  TstSideMenu.MenuBar.Width = 250;
+  TstSideMenu.Visible = False;
+  TstSideMenu.ClMenuPosition = clLeft;
+  
+  showBtn = MyForm.AddNewProButton(MyForm, 'showBtn', 'Aç');
+  clComponent.SetupComponent(showBtn, '{
+  "Align" : "Left",
+  "BackgroundColor" : "#4982df",
+  "TextColor" : "#fafafa",
+  "TextBold" : "yes",
+  "RoundHeight" : 10,
+  "RoundWidth" : 10 }');
+  MyForm.AddNewEvent(showBtn, tbeOnClick, 'ShowMenuFrame');
+  
+  hideBtn = MyForm.AddNewProButton(TstSideMenu.VertScrollBox, 'hideBtn', 'Kapat');
+  clComponent.SetupComponent(hideBtn, '{
+  "Height" : 40,
+  "MarginTop" : 10,
+  "Align" : "Top",
+  "TextHorizontalAlign" : "Center",
+  "BackgroundColor" : "#ff7b00",
+  "TextColor" : "#ffffff",
+  "TextBold" : "yes",
+  "RoundHeight" : 10,
+  "RoundWidth" : 10 }');
+  MyForm.AddNewEvent(hideBtn, tbeOnClick, 'HideMenuFrame');
+  
+  MyForm.Run;
+}

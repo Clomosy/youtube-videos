@@ -1,0 +1,66 @@
+Var   
+  MyForm : TclForm;
+  lblTitle, lblList : TClLabel;
+  edtList : TclEdit;
+  btn : TClProButton;
+  lytList : TClLayout;
+  MyGuideForm : TclGuideForm;
+  guideListView : TclListView;
+
+void SetMainView;
+{ 
+  lblTitle= MyForm.AddNewLabel(MyForm,'lblTitle','MyForm Screen');
+  lblTitle.Align=alMostTop;
+  lblTitle.Margins.Left=100;
+  lblTitle.Height =30;
+  lblTitle.StyledSettings = ssFamily;
+  lblTitle.TextSettings.Font.Size= 20;
+  
+  lytList = MyForm.AddNewLayout(MyForm,'lytList');
+  lytList.Align = alTop;
+  lytList.Margins.Top = 10;
+  lytList.Height = 25;
+  lytList.Width = 340;
+  
+  lblList = MyForm.AddNewLabel(lytList,'lblList','Text: ');
+  lblList.Align = alMostLeft;
+  lblList.Width = 140;
+  lblList.Margins.Left = 10;
+  
+  edtList = MyForm.AddNewEdit(lytList,'edtList','Text');
+  edtList.Align = alLeft;
+  edtList.Width = 140;
+  
+  btn = MyForm.AddNewProButton(lytList,'btn','');
+  clComponent.SetupComponent(btn,'{"Align" : "Right","Width" :50,"Height":60,"MarginRight":10,
+  "RoundHeight":10, "RoundWidth":10,"BorderColor":"#be92e0","BorderWidth":2,
+  "ImgUrl":"https://images.freeimages.com/fic/images/icons/573/must_have/48/search.png"}');
+  
+  MyForm.AddNewEvent(btn,tbeOnClick,'SetGuideForm');
+}
+void SetGuideForm;
+{
+  MyGuideForm = TclGuideForm.Create(Self);
+  guideListView = TClListView(MyGuideForm.clFindComponent('FormClListView'));
+  guideListView.Align = alClient;
+  guideListView.Visible = True;
+  
+  guideListView.clLoadListViewDataFromDataset(Clomosy.ClDataSetFromJSON('[
+  {"MAIN_TEXT" : "Main 1", "FOOTER_TEXT" : "Footer"},
+  {"MAIN_TEXT" : "Main 2", "FOOTER_TEXT" : "Footer"},
+  {"MAIN_TEXT" : "Main 3", "FOOTER_TEXT" : "Footer"},
+  {"MAIN_TEXT" : "Main 4", "FOOTER_TEXT" : "Footer"}
+  ]'));
+  
+  MyGuideForm.ReturnItemData = 'MAIN_TEXT';
+  MyGuideForm.ReturnItemObject = edtList;
+  
+  MyGuideForm.Run;
+}
+  
+{
+  MyForm=TclForm.Create(Self);
+  MyForm.SetFormColor('#ffffff','#cebade',clGVertical);
+  SetMainView;  
+  MyForm.Run;
+}

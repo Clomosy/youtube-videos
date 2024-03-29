@@ -1,0 +1,44 @@
+Var
+  MyForm:TclForm;
+  testDate: TClProDateEdit;
+  testButton : TclButton;
+
+void ProDateEditShowStr;
+{
+  ShowMessage(testDate.DateStr);
+}
+
+void SetTestDate;
+{
+  testDate = MyForm.AddNewProDateEdit(MyForm,'testDate');
+  clComponent.SetupComponent(testDate,
+  '{"Align":"Center",
+  "MarginTop":20, 
+  "MarginBottom":10,
+  "Width" :120, 
+  "Height":40,
+  "RoundHeight":10,
+  "RoundWidth":10,
+  "BorderColor":"#8b38f0",
+  "BorderWidth":2,
+  "BackgroundColor":"#c299f5",
+  "TextSize" : 18,
+  "TextVerticalAlign" : "Center",
+  "TextHorizontalAlign" : "Center"
+  }');
+}
+
+{
+  MyForm = TclForm.Create(Self);
+  SetTestDate;
+  testButton = MyForm.AddNewButton(MyForm,'testButton','Click');
+  testButton.TextSettings.Font.Size = 2;
+  testButton.Align = alBottom;
+  testButton.Margins.Left = 60;
+  testButton.Margins.Right = 60;
+  testButton.Margins.Bottom = 50;
+  testButton.Height = 50;
+  testButton.Width = 100;
+  MyForm.AddNewEvent(testButton,tbeOnClick,'ProDateEditShowStr');
+  MyForm.Run;
+}

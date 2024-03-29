@@ -1,0 +1,28 @@
+Var   
+  MyForm:TclForm;
+  testEdit: TclProEdit;
+  testImg : TclImage;
+
+void SetEdit;
+{
+  testEdit = MyForm.AddNewProEdit(MyForm,'testEdit','Phone Number');
+  clComponent.SetupComponent(testEdit,'{"Align" : "Center","MarginBottom":135,"Width" :180, "Height":45,"RoundHeight":10,"RoundWidth":10,"BorderColor":"#fabd2",
+  "BorderWidth":2,"MarginLeft":30}');
+  testEdit.clTypeOfField = taFloat; 
+  testEdit.MaxLength = 11;
+  
+  testImg = MyForm.AddNewImage(testEdit,'testImg');
+  testImg.Align = alLeft;
+  testImg.Margins.Left = 5;
+  testImg.Margins.Top = 5;
+  testImg.Margins.Bottom = 5;
+  testImg.Width = 25;
+  
+  MyForm.SetImage(testImg,'https://clomosy.com/demos/phone.png');
+}
+
+{
+  MyForm = TclForm.Create(Self);
+  SetEdit;
+  MyForm.Run;
+}

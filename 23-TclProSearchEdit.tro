@@ -1,0 +1,108 @@
+var   
+  MyForm:TclForm;
+  testListView : TClProListView;
+  testDesignerPanel : TClListViewDesignerPanel;
+  productName, productPrice : TclProLabel;
+  searchEdt : TClProSearchEdit;
+
+void SetSearchEdit;
+{
+  searchEdt = MyForm.AddNewProSearchEdit(MyForm,'searchEdt','Search Something ...');
+  searchEdt.Align = alTop;
+  searchEdt.Margins.Top = 15;
+  searchEdt.Margins.Left = 15;
+  searchEdt.Margins.Right = 15;
+  searchEdt.Margins.Bottom = 10;
+  searchEdt.Height = 40;
+  // searchEdt.clBarcodeReader = True;
+}
+
+void CreateListView
+{
+  testListView = MyForm.AddNewProListView(MyForm,'testListView');
+  testListView.Properties.ItemSpace = 10;     
+  
+  clComponent.SetupComponent(testListview,
+  '{"Height" : 150,
+  "Align":"Client",
+  "MarginBottom":20,
+  "MarginTop":20,
+  "MarginRight":20,
+  "MarginLeft":20, 
+  "ListType":"Cart",   
+  "ItemColumnCount" : 1,
+  "ItemHeight" : 150,
+  "BorderColor":"#f3aa44", 
+  "BorderWidth":2,
+  "RoundWidth":5, 
+  "RoundHeight":5}');
+  
+  searchEdt.TargetListView = testListview;
+}
+
+
+
+void CreateDesignerPanel
+{
+  testDesignerPanel = MyForm.AddNewProListViewDesignerPanel(testListView, 'testDesignerPanel');
+  
+  clComponent.SetupComponent(testDesignerPanel, 
+  '{"Height":100,
+  "Width" : 150,
+  "BackgroundColor":"#f3d5aa",
+  "BorderColor":"#ff9b0f",
+  "BorderWidth":2,
+  "RoundHeight":20,
+  "RoundWidth":20}');
+  
+  testListView.SetDesignerPanel(testDesignerPanel);
+}
+
+void CreateData;
+{
+  productName = MyForm.AddNewProLabel(testDesignerPanel, 'productName', 'test');
+  clComponent.SetupComponent(productName,
+  '{"MarginTop" : 10,
+  "MarginLeft" : 10,
+  "MarginRight" : 10,
+  "MarginBottom" : 10,
+  "Height" : 30,
+  "TextSize" : 20,
+  "TextColor" : "#de6835",
+  "Align" : "MostTop"}');
+  
+  // Adding productName as caption 
+  testDesignerPanel.AddPanelObject(productName, clCaption);
+  
+  
+  productPrice = MyForm.AddNewProLabel(testDesignerPanel, 'productPrice', 'test');
+  clComponent.SetupComponent(productPrice,
+  '{"MarginTop" : 10,
+  "MarginLeft" : 10,
+  "MarginRight" : 10,
+  "MarginBottom" : 10,
+  "Height" : 20,
+  "Align" : "MostTop"}');
+  
+  testDesignerPanel.AddPanelObject(productPrice, clText);
+}
+
+void AddDataToListView;
+{
+  testListView.clLoadProListViewDataFromDataset(Clomosy.ClDataSetFromJSON('[
+  {"productName" : "Phone 1", "productPrice" : "18999"},
+  {"productName" : "Phone 2", "productPrice" : "12400"},
+  {"productName" : "Phone 3", "productPrice" : "8999"},
+  {"productName" : "Phone 4", "productPrice" : "10400"}
+  ]'));
+}
+
+{
+  MyForm = TclForm.Create(Self);
+  SetSearchEdit;
+  CreateListView;
+  CreateDesignerPanel;
+  CreateData;
+  AddDataToListview;
+  MyForm.Run;
+}

@@ -1,0 +1,19 @@
+Var  
+  MyForm:TclForm;
+  testPanel : TclProPanel;
+ 
+{
+  MyForm=TclForm.Create(self);
+  testPanel=MyForm.AddNewProPanel(MyForm,'testPanel');
+  clComponent.SetupComponent(testPanel,
+  '{"Align" : "Center",
+  "MarginBottom":135,
+  "Width" :200, 
+  "Height":280,
+  "RoundHeight":10,
+  "RoundWidth":10,
+  "BorderWidth":2,
+  "BorderColor":"#fabd2"}');
+  
+  MyForm.Run;
+}

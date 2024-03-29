@@ -1,0 +1,15 @@
+Var   
+MyForm:TclForm;
+testProLabel: TClProLabel;
+
+
+{
+  MyForm = TclForm.Create(Self);
+
+ testProLabel = MyForm.AddNewProLabel(MyForm,'testProLabel','User Name :');
+
+ clComponent.SetupComponent(testProLabel,'{"Align" : "Center","MarginBottom":115,"Width" :150, "Height":30,"TextColor":"#f5428d","TextSize":12,"TextVerticalAlign":"center",
+ "TextHorizontalAlign":"left","TextBold":"yes"}');
+
+  MyForm.Run;
+}

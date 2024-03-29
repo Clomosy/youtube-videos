@@ -1,0 +1,49 @@
+var
+  MyForm : TclForm;
+  testEdit : TclEdit;
+  testButton,testButton2,testButton3,testButton4 : TclButton;
+  testLayout : TclLayout;
+
+{
+  MyForm=TclForm.Create(self);
+  
+  testLayout = MyForm.AddNewLayout(MyForm,'testLayout');
+  testLayout.Margins.Top = 200;
+  //testLayout.Margins.Bottom = 200;
+  //testLayout.Margins.Left = 200;
+  testLayout.Margins.Right = 200;
+  
+  testButton = MyForm.AddNewButton(testLayout,'testButton','Click1');
+  testButton.Width = 150;
+  testButton.StyledSettings = ssFamily;
+  testButton.TextSettings.Font.Size = 20;
+  testButton.TextSettings.FontColor = clAlphaColor.clHexToColor('#8a067c');
+  testButton.Margins.Right = 220;
+  testButton.Margins.Bottom = 100;
+  
+  testButton2 = MyForm.AddNewButton(testLayout,'testButton2','Click2');
+  testButton2.Width = 150;
+  testButton2.StyledSettings = ssFamily;
+  testButton2.TextSettings.Font.Size = 20;
+  testButton2.TextSettings.FontColor = clAlphaColor.clHexToColor('#272A35');
+  testButton2.Margins.Left = 100;
+  testButton2.Margins.Bottom = 100;
+  
+  testButton3 = MyForm.AddNewButton(testLayout,'testButton3','Click3');
+  testButton3.Width = 150;
+  testButton3.StyledSettings = ssFamily;
+  testButton3.TextSettings.Font.Size = 20;
+  testButton3.TextSettings.FontColor = clAlphaColor.clHexToColor('#40F000');
+  testButton3.Margins.Right = 220;
+  testButton3.Margins.Top = 100;
+  
+  testButton4 = MyForm.AddNewButton(testLayout,'testButton4','Click4');
+  testButton4.Width = 150;
+  testButton4.StyledSettings = ssFamily;
+  testButton4.TextSettings.Font.Size = 20;
+  testButton4.TextSettings.FontColor = clAlphaColor.clHexToColor('#F000E8');
+  testButton4.Margins.Left = 100;
+  testButton4.Margins.Top = 100;
+  
+  MyForm.Run;
+}

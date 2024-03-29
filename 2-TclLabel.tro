@@ -1,0 +1,21 @@
+var
+ MyForm : TclForm;
+ testLabel : TCLLabel;
+{
+  MyForm = TclForm.Create(Self);
+  
+  testLabel = MyForm.AddNewLabel(MyForm , 'testLabel' , 'Test Label ');
+  testLabel.Text = 'Test Metni';
+  testLabel.Height = 50;
+  testLabel.Width = 250;
+  testLabel.align = alTop;
+  testLabel.Margins.Left = 50;
+  testLabel.Margins.Right = 100;
+  testLabel.Margins.Top = 50;
+  testLabel.Margins.Bottom = 10;
+  testLabel.StyledSettings = ssFamily;
+  testLabel.textSettings.Font.Size = 20;
+  testLabel.textSettings.FontColor = clAlphaColor.clHexToColor('#3238a8');
+  
+  MyForm.Run;
+}

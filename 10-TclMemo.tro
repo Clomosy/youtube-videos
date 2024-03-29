@@ -1,0 +1,45 @@
+var
+  MyForm : TclForm;
+  noteAddEdit : TCLEdit;
+  addBtn,deleteBtn : TCLButton;
+  noteMemo : TclMemo;
+
+void addBtnOnClick;
+{
+ noteMemo.Lines.Add('* '+noteAddEdit.Text);
+ noteAddEdit.Text = '';
+}
+void deleteBtnOnClick;
+{
+  noteMemo.Lines.Clear; // Delete() ile istenilen satir silinebilir.
+}
+{
+  MyForm = TclForm.Create(Self);
+  
+  noteMemo = MyForm.AddNewMemo(MyForm,'noteMemo','');
+  noteMemo.Align = alCenter;
+  noteMemo.Height = 200;
+  noteMemo.Width = 200;
+  noteMemo.ReadOnly = True;
+  noteMemo.TextSettings.WordWrap = True;
+  
+  noteAddEdit = MyForm.AddNewEdit(MyForm,'noteAddLbl','Enter your note...');
+  noteAddEdit.Margins.Bottom = 500;
+  noteAddEdit.Width =150;
+  noteAddEdit.Height =50;
+  
+  addBtn = MyForm.AddNewButton(MyForm,'addBtn', 'Ekle');
+  addBtn.Margins.Bottom = 400;
+  addBtn.Width =50;
+  addBtn.Height = 50;
+  MyForm.AddNewEvent(addBtn,tbeOnClick,'addBtnOnClick');
+  
+  deleteBtn = MyForm.AddNewButton(MyForm,'deleteBtn', 'Temizle');
+  deleteBtn.Align= alCenter;
+  deleteBtn.Margins.Top = 275; 
+  deleteBtn.Width =50;
+  deleteBtn.Height = 50;
+  MyForm.AddNewEvent(deleteBtn,tbeOnClick,'deleteBtnOnClick');
+  
+  MyForm.Run;
+}

@@ -1,0 +1,33 @@
+var
+  MyForm:TclForm;
+  QrLayout :TclLayout;
+  QrButon:TclButton;
+  QRGen :  TClQRCodeGenerator;
+ 
+void QrButonClicked;
+{
+  QRGen.Text = FormatDateTime('dd.mm.yy  hh:nn:ss', Now); //dd=day,mm=moon,yy=year -- hh=hour,nn=minute, ss= second
+  QrButon.Caption = QRGen.Text;
+}
+  
+{
+  MyForm = TclForm.Create(Self);
+  
+  QrLayout = MyForm.AddNewLayout(MyForm,'QrLayout');
+  QrLayout.Align=ALTop;
+  QrLayout.Height = 200;
+  QrLayout.Margins.Top = 30;
+  
+  QrButon = MyForm.AddNewButton(MyForm,'QrButon','RENEW');
+  QrButon.Align = alCenter;
+  QrButon.Width = 200;
+  QrButon.Height = 50;
+  MyForm.AddNewEvent(QrButon,tbeOnClick,'QrButonClicked');
+  
+  QRGen= MyForm.AddNewQRCodeGenerator(QrLayout,'QRGen','FirstQr');
+  QRGen.Height = 200;
+  QRGen.Width = 200;
+  QRGen.Align = alCenter;
+  
+  MyForm.Run;
+}

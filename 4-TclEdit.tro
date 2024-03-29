@@ -1,0 +1,20 @@
+var
+ MyForm : TclForm;
+ testEdit : TCLEdit;
+{
+  MyForm = TclForm.Create(Self);
+
+  testEdit = MyForm.AddNewEdit(MyForm,'testEdit', 'Write something');
+  testEdit.Height = 50;
+  testEdit.Width = 150;
+  testEdit.Align = alTop;
+  testEdit.Margins.Top = 100;
+  testEdit.Margins.Left = 100;
+  testEdit.styledSettings = ssFamily;
+  testEdit.TextSettings.Font.Size = 30;
+  testEdit.TextSettings.FontColor = clAlphaColor.clHexToColor('#e60000');
+  testEdit.ReadOnly = False;
+  testEdit.clTypeOfField = taFloat;
+  
+  MyForm.Run;
+}

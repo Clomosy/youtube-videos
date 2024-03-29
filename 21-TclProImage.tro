@@ -1,0 +1,26 @@
+Var   
+  MyForm:TclForm;
+  testImg: TClProImage;
+
+void SetImage;
+{
+  testImg = MyForm.AddNewProImage(MyForm,'testImg');
+  
+  clComponent.SetupComponent(testImg,
+  '{"Align" : "Center",
+  "MarginBottom":135,
+  "Width" :150, 
+  "Height":150,
+  "RoundHeight":10,
+  "RoundWidth":10,
+  "BorderColor":"#fabd2",
+  "BorderWidth":2,
+  "ImgUrl":"https://img.icons8.com/external-wanicon-lineal-color-wanicon/512/external-information-communication-wanicon-lineal-color-wanicon.png", 
+  "ImgFit":"yes"}');
+}
+
+{
+  MyForm = TclForm.Create(Self);
+  SetImage;
+  MyForm.Run;
+}

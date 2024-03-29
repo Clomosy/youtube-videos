@@ -1,0 +1,10 @@
+var
+ MyForm:TclForm;
+
+{
+ MyForm = TclForm.Create(Self);
+ //MyForm.SetFormColor('#4287f5',clGNone); 
+ //MyForm.SetFormColor('#4287f5','#0019a8',clGVertical);
+ MyForm.SetFormBGImage('https://clomosy.com/assets/images/socialen.png');
+ MyForm.Run;
+}

@@ -1,0 +1,25 @@
+var
+ MyForm : TclForm;
+ testRadioButton,testRadioButton2:TCLRadioButton;
+ 
+{
+  MyForm = TclForm.Create(Self);
+  
+  testRadioButton = MyForm.AddNewRadioButton(MyForm, 'testRadioButton' , 'Female');
+  testRadioButton.StyledSettings = ssFamily;
+  testRadioButton.TextSettings.Font.Size = 25;
+  testRadioButton.TextSettings.FontColor = clAlphaColor.clHexToColor('#32a852');
+  testRadioButton.Height = 30;
+  testRadioButton.align = alTop;
+  testRadioButton.isChecked = False;
+  
+  testRadioButton2 = MyForm.AddNewRadioButton(MyForm, 'testRadioButton2' , 'Male');
+  testRadioButton2.StyledSettings = ssFamily;
+  testRadioButton2.TextSettings.Font.Size = 25;
+  testRadioButton2.TextSettings.FontColor = clAlphaColor.clHexToColor('#32a852');
+  testRadioButton2.Height = 30;
+  testRadioButton2.align = alTop;
+  testRadioButton2.isChecked = False;
+  
+  MyForm.Run;
+}

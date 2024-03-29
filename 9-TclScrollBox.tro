@@ -1,0 +1,38 @@
+Var
+  MyForm:TclForm;
+  testButtonX,testButtonY : TclButton;
+  counter : Integer;
+  VerticalScrollBox: TclVertScrollBox;
+  HorizontalScrollBox: TclHorzScrollBox;
+
+{
+  Myform = TclForm.Create(Self);
+  
+  HorizontalScrollBox = MyForm.AddNewHorzScrollBox(MyForm,'ScrollX');
+  HorizontalScrollBox.Align = alMostTop;
+  HorizontalScrollBox.Height = TForm(MyForm).clientHeight/4;
+  
+  VerticalScrollBox = MyForm.AddNewVertScrollBox(MyForm,'ScrollY');
+  VerticalScrollBox.Align = alMostTop;
+  VerticalScrollBox.Height = TForm(MyForm).clientHeight/2;
+  
+  for (counter = 1 to 15)
+  {
+    testButtonX = MyForm.AddNewButton(HorizontalScrollBox,'testButtonX'+IntToStr(counter),'ButtonX '+IntToStr(counter));
+    testButtonX.Align=alLeft;
+    testButtonX.height=100;
+    testButtonX.StyledSettings= ssFamily;
+    testButtonX.TextSettings.FontColor= clAlphaColor.clHexToColor('#2c867c');
+  }
+  
+  for (counter= 1 to 15)
+  {
+    testButtonY = MyForm.AddNewButton(VerticalScrollBox,'testButtonY'+IntToStr(counter),'ButtonY '+IntToStr(counter));
+    testButtonY.Align=alTop;
+    testButtonY.height=100;
+    testButtonY.StyledSettings= ssFamily;
+    testButtonY.TextSettings.FontColor= clAlphaColor.clHexToColor('#8a067c');
+  }
+  
+  MyForm.Run;
+}

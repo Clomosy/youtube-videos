@@ -1,0 +1,55 @@
+var
+  MyForm : TclStyleForm;
+  BtnSample : TclButton;
+  MyExpander1, MyExpander2 : TclExpander;
+  MyLayout1, MyLayout2 : TclLayout;
+  MyLabel1, MyLabel2 : TclLabel;
+
+void BtnSampleClick;
+{
+  MyExpander1.IsExpanded = Not MyExpander1.IsExpanded;
+  MyExpander2.IsExpanded = Not MyExpander2.IsExpanded;
+}
+
+void MyExpanderClick;
+var
+senderExpander : TclExpander;
+{
+  senderExpander = TclExpander(MyForm.clSender);
+  ShowMessage(senderExpander.Text);
+}
+
+{
+  MyForm = TclStyleForm.Create(Self);
+  MyForm.clSetStyle(MyForm.LightSB);
+  
+  BtnSample = MyForm.AddNewButton(MyForm, 'BtnSample', 'Kapat/Aç');
+  BtnSample.Align = alMostTop;
+  MyForm.AddNewEvent(BtnSample, tbeOnClick, 'BtnSampleClick');
+  
+  MyExpander1 = MyForm.AddNewExpander(MyForm, 'MyExpander1', 'Başlık');
+  MyExpander1.Align = alTop;
+  MyExpander1.Height = 100;
+  // MyExpander1.IsExpanded = True;
+  MyForm.AddNewEvent(MyExpander1, tbeOnClick, 'MyExpanderClick');
+  
+  MyLayout1 = MyForm.AddNewLayout(MyExpander1, 'MyLayout1');
+  MyLayout1.Align = alClient;
+  
+  MyLabel1 = MyForm.AddNewLabel(MyExpander1, 'MyLabel1', 'İçerik');
+  MyLabel1.Align = alTop;
+  
+  MyExpander2 = MyForm.AddNewExpander(MyForm, 'MyExpander2', 'Başlık');
+  MyExpander2.Align = alTop;
+  MyExpander2.Height = 100;
+  // MyExpander2.IsExpanded = True;
+  MyForm.AddNewEvent(MyExpander2, tbeOnClick, 'MyExpanderClick');
+  
+  MyLayout2 = MyForm.AddNewLayout(MyExpander2, 'MyLayout2');
+  MyLayout2.Align = alClient;
+  
+  MyLabel2 = MyForm.AddNewLabel(MyExpander2, 'MyLabel2', 'İçerik');
+  MyLabel2.Align = alTop;
+  
+  MyForm.Run;
+}

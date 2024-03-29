@@ -1,0 +1,33 @@
+var
+  MyForm:TclForm;
+  testComboBox : TclComboBox;
+
+void comboBoxChanged;
+{
+ ShowMessage('Index : '+IntToStr(testComboBox.ItemIndex)); 
+ ShowMessage('Key : '+testComboBox.Items[testComboBox.ItemIndex]); 
+ ShowMessage('Key : '+testComboBox.GetItemIndex(testComboBox.ItemIndex)); 
+ ShowMessage('Value : '+testComboBox.GetValueIndex(testComboBox.ItemIndex)); 
+}
+{ 
+  MyForm = TclForm.Create(Self);
+  
+  testComboBox = MyForm.AddNewComboBox(MyForm,'testComboBox');
+  testComboBox.Align = alTop;
+  testComboBox.Width = 150;
+  testComboBox.Margins.Top=10;
+  testComboBox.Margins.Left =50;
+  testComboBox.Margins.Right =50;
+  
+  testComboBox.AddItem('Pazartesi','01');
+  testComboBox.AddItem('Salı','02');
+  testComboBox.AddItem('Çarşamba','03');
+  testComboBox.AddItem('Perşembe','04');
+  testComboBox.AddItem('Cuma','05');
+  testComboBox.AddItem('Cumartesi','06');
+  testComboBox.AddItem('Pazar','07');
+  
+  MyForm.AddNewEvent(testComboBox,tbeOnChange,'comboBoxChanged');
+  
+  MyForm.Run;
+}

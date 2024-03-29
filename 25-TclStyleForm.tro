@@ -1,0 +1,8 @@
+var
+  MyForm:TclStyleForm;
+{  
+  MyForm = TclStyleForm.Create(Self);
+  MyForm.clSetStyle(MyForm.DarkSB);  // MyForm.clSetStyle(MyForm.LightSB);
+  
+  MyForm.Run;
+}

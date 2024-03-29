@@ -1,0 +1,22 @@
+var  
+  MyForm:TclForm;
+  testEdit : TclEdit;
+  testPanel : TCLPanel;
+{
+  MyForm=TclForm.Create(self);
+  testPanel = MyForm.AddNewPanel(MyForm, 'testPanel',' ');
+  testPanel.Height = 50;
+  
+  testEdit = MyForm.AddNewEdit(testPanel,'testEdit','Write something...');
+  testEdit.Width = 300; 
+  //testEdit.Align = alClient;
+  
+  testPanel.Margins.Left = 50;
+  testPanel.Margins.Right = 50;
+  testPanel.Margins.Top = 20;
+  testPanel.Margins.Bottom = 20;
+  
+  testPanel.StyleLookup = 'pushpanel';
+  
+  MyForm.Run;
+}

@@ -1,0 +1,10 @@
+var
+  MyDrawForm : TclDrawForm;
+
+{
+  MyDrawForm = TclDrawForm.Create(Self);
+  MyDrawForm.clSetStyle(MyDrawForm.DarkSB); //MyDrawForm.DarkSB - MyDrawForm.LightSB
+  MyDrawForm.DrawApp(True);  
+  
+  MyDrawForm.Run;
+}

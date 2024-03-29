@@ -1,0 +1,15 @@
+var
+  MyForm:TclForm;
+  testImg : TclImage;
+
+{
+  MyForm = TclForm.Create(Self);
+  testImg = MyForm.AddNewImage(MyForm,'testImg');
+  MyForm.setImage(testImg,'https://i0.wp.com/clomosy.com.tr/wp-content/uploads/2023/12/clomosy.png');
+  
+  testImg.Height = 500;
+  testImg.Width = 500;
+  
+  MyForm.AddNewEvent(testImg,tbeOnClick,'ShowMessage(''Image öğesine tıklandı!'');');
+  MyForm.Run;
+}

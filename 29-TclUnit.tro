@@ -1,0 +1,54 @@
+Ana Kod:
+var
+  anaForm : TclStyleForm;
+  btnUnit : TclButton;
+  Unit1 :TclUnit;
+  lblInfo : tclLabel;
+  
+void GoToUnit1;
+{
+  anaForm.clShow;
+  Unit1.UnitName = 'Unit1';
+  Unit1.CallerForm = anaForm;
+  Unit1.Run;
+}
+
+{
+  anaForm = TclStyleForm.Create(Self);
+  Unit1 = TclUnit.Create;
+  
+  lblInfo = anaForm.AddNewLabel(anaForm,'lblInfo','Beklenen metin...');
+  lblInfo.Align = alMostTop;
+  
+  btnUnit = anaForm.AddNewButton(anaForm,'btnUnit','Özelleştirilmiş Unit');
+  btnUnit.Align = alTop;
+  btnUnit.Margins.Top = 20;
+  anaForm.AddNewEvent(btnUnit,tbeOnClick,'GoToUnit1');
+  
+  anaForm.Run;
+}
+
+Unit1:
+var
+  uForm : TclStyleForm;
+  btnUnit :TclButton;
+  edtUnit :TclEdit;
+  
+void SendToMyForm;
+{
+  CallerForm.clShow;
+  lblInfo.Text = edtUnit.Text;
+}
+
+{
+  uForm = TclStyleForm.Create(Self);
+  edtUnit= uForm.AddNewEdit(uForm,'edtUnit', 'Gerekli açıklamayı giriniz...');
+  edtUnit.Align = alMostTop;
+  
+  btnUnit= uForm.AddNewButton(uForm,'btnUnit','Bilgiyi gönder');
+  btnUnit.Align = alTop;
+  btnUnit.Margins.Top = 20;
+  uForm.AddNewEvent(btnUnit,tbeOnClick,'SendToMyForm');
+  
+  uForm.Run;
+}

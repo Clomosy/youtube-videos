@@ -1,0 +1,46 @@
+Var
+MyForm:TclForm;
+DeviceMotionSensor:TClMotionSensor;
+GameTimer:TClTimer;
+MotionImg : TCLImage;
+
+void GameLoop;
+Const 
+  BallSpeed = 5;
+{
+  If (Clomosy.PlatformIsMobile)
+  {
+    Case DeviceMotionSensor.GetDirectionX of 
+    {
+      1:MotionImg.Position.X = MotionImg.Position.X - BallSpeed;//Move left
+      2:MotionImg.Position.X = MotionImg.Position.X + BallSpeed;//Move right
+    }
+    Case DeviceMotionSensor.GetDirectionY of 
+    {
+      1:MotionImg.Position.Y = MotionImg.Position.Y - BallSpeed;//Move up
+      2:MotionImg.Position.Y = MotionImg.Position.Y + BallSpeed;//Move down
+    }
+  }
+}
+
+{
+MyForm = TclForm.Create(Self);
+MyForm.SetFormBGImage('https://clomosy.com/demos/bg4.jpg');
+
+MotionImg= MyForm.AddNewImage(MyForm,'MotionImg');
+MotionImg.Align = alCenter;
+MotionImg.Align = alNone;
+MotionImg.Height = 200;
+MotionImg.Width = 200;
+MyForm.setImage(MotionImg,'https://clomosy.com/demos/balloon2.png');
+
+DeviceMotionSensor = MyForm.AddNewSensorsMotion(MyForm,'DeviceMotionSensor');
+DeviceMotionSensor.Active = True;
+
+GameTimer= MyForm.AddNewTimer(MyForm,'GameTimer',1000);
+GameTimer.Interval = 30;
+GameTimer.Enabled = True;
+MyForm.AddNewEvent(GameTimer,tbeOnTimer,'GameLoop');
+
+MyForm.Run;
+}

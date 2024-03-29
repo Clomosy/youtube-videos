@@ -1,0 +1,43 @@
+var
+  MyForm:TclForm;
+  GetStartTimerBtn,GetStopTimerBtn : TClButton;
+  lblTimer : TclLabel;
+  getTimer: TClTimer;
+  duration, sn ,ss : Integer;
+  
+void BtnStartClick;
+{
+  getTimer.Enabled = True;
+}
+void BtnStopClick;
+{
+  getTimer.Enabled = False;
+}
+void timerShow;
+{
+  Inc(duration);
+  sn = (duration div 10); //bölümün tam kısmını alır
+  ss = (duration mod 10); //kalanı alır
+  lblTimer.Caption = IntToStr(sn)+'.'+IntToStr(ss);
+}
+{
+  duration = 0;
+  MyForm = TclForm.Create(Self);
+  getTimer= MyForm.AddNewTimer(MyForm,'getTimer',100);
+  MyForm.AddNewEvent(getTimer,tbeOnTimer,'timerShow');
+  
+  GetStartTimerBtn = MyForm.AddNewButton(MyForm,'GetStartTimerBtn','Start');
+  GetStartTimerBtn.Margins.Right = 300;
+  MyForm.AddNewEvent(GetStartTimerBtn,tbeOnClick,'BtnStartClick');
+  
+  GetStopTimerBtn = MyForm.AddNewButton(MyForm,'GetStopTimerBtn','Stop');
+  GetStopTimerBtn.Margins.Left = 100;
+  MyForm.AddNewEvent(GetStopTimerBtn,tbeOnClick,'BtnStopClick');
+  
+  lblTimer= MyForm.AddNewLabel(MyForm,'lblTimer','');
+  lblTimer.StyledSettings = ssFamily;
+  lblTimer.TextSettings.Font.Size=20;
+  lblTimer.Align = alCenter;
+  
+  MyForm.Run;
+}

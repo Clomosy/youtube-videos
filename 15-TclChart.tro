@@ -1,0 +1,20 @@
+var
+  MyForm:TclForm;
+  testChart : TClChart;
+
+{
+  MyForm = TclForm.Create(Self);
+  
+  testChart = MyForm.AddNewChart(MyForm,'testChart','test');
+  testChart.ChartTitle = 'Age Chart Title';
+  testChart.Charttype = clCPie;
+  testChart.XAxisText = 'Name';
+  testChart.ChartItemText = 'Age Chart Item Text';
+  testChart.ChartItemsValue = 'Age';
+  testChart.Height = 300;
+  testChart.Width = 300;
+  testChart.Align = alCenter;
+  testChart.clLoadDataFromJSONStr('[{"Name":"John","Age":21,"color":"clOrange"},{"Name":"Natasha","Age":27,"color":"clGold"}]');
+  
+  MyForm.Run;
+}

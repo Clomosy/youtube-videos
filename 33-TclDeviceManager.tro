@@ -1,0 +1,32 @@
+var
+  MyDevice:TclDeviceManager;
+  MyForm : TclForm;
+  vibrateBtn : TCLButton;
+
+void VibrateDevice;
+{
+  MyDevice.Vibrate(500);
+}
+
+void ContList;
+{
+  ShowMessage(MyDevice.ContactsList.Text); 
+}
+
+{
+  MyForm = TclForm.Create(Self);
+  
+  vibrateBtn = MyForm.AddNewButton(MyForm, 'vibrateBtn', 'Titreşim Ver');
+  vibrateBtn.Align = alCenter;
+  vibrateBtn.Height = 50;
+  vibrateBtn.Width = 150;
+  MyForm.AddNewEvent(vibrateBtn,tbeOnClick,'VibrateDevice');
+  
+  MyDevice=TclDeviceManager.Create;
+  
+  ShowMessage(MyDevice.BatteryStatus);
+  
+  MyDevice.GetAddressBookContacts('ConList');
+  
+  MyForm.Run;
+}

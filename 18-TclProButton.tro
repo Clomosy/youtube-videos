@@ -1,0 +1,20 @@
+Var   
+  MyForm:TclForm;
+  testBtn : TClProButton;
+
+void BtnOnClick;
+{
+  ShowMessage('Hello..');
+}
+
+{
+  MyForm = TclForm.Create(Self);
+  
+  testBtn = MyForm.AddNewProButton(MyForm,'testBtn','');
+  clComponent.SetupComponent(testBtn,'{"caption":"Click Hero","Align" : "Center","MarginBottom":135,"Width" :200, 
+  "Height":70,"RoundHeight":2,
+  "RoundWidth":2,"BorderColor":"#fd4e4e","BorderWidth":2}');
+  MyForm.SetImage(testBtn,'https://clomosy.com/demos/foodInformationBox.png'); 
+  MyForm.AddNewEvent(testBtn,tbeOnClick,'BtnOnClick');
+  MyForm.Run;
+}

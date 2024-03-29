@@ -1,0 +1,22 @@
+var
+ MyForm : TclForm;
+ testButton : TCLButton;
+{
+  MyForm = TclForm.Create(Self);
+
+  testButton = MyForm.AddNewButton(MyForm , 'testButton' , 'Click');
+  testButton.Caption = 'Button Metni';
+  testButton.Height = 50;
+  testButton.Width = 100;
+  testButton.Align = alBottom;
+  testButton.Margins.Left = 50;
+  testButton.Margins.Right = 50;
+  testButton.Margins.Top = 10;
+  testButton.Margins.Bottom = 100;
+  testButton.styledSettings = ssFamily;
+  testButton.TextSettings.Font.Size = 20;
+  testButton.TextSettings.FontColor = clAlphaColor.clHexToColor('#d10808');
+  MyForm.AddNewEvent(testButton , tbeOnClick , 'ShowMessage(''Clomosy'')');
+  
+  MyForm.Run;
+}

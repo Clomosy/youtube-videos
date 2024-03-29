@@ -1,0 +1,43 @@
+var 
+MyForm : TclForm;
+testLabel : TclLabel;
+testButton : TclButton;
+testCheckBox,testCheckBox2 : TclCheckBox;
+void ButtonClicked;
+{
+  testCheckBox.isChecked = not testCheckBox;
+  testCheckBox2.isChecked = not testCheckBox2;
+}
+{
+  MyForm = TclForm.Create(Self);
+  
+  testLabel = MyForm.AddNewLabel(MyForm,'testLabel','Your hobbies?');
+  testLabel.StyledSettings = ssFamily;
+  testLabel.TextSettings.Font.Size = 25;
+  testLabel.TextSettings.FontColor = clAlphaColor.clHexToColor('#4a08ff');
+  testLabel.Align = alMostTop;
+  testLabel.Height = 30;
+  
+  testButton = MyForm.AddNewButton(MyForm,'testButton','Click');
+  testButton.TextSettings.Font.Size = 50;
+  testButton.Align = alCenter;
+  testButton.Height = 50;
+  testButton.Width = 100;
+  
+  testCheckBox = MyForm.AddNewCheckBox(MyForm,'testCheckBox','To do sport');
+  testCheckBox.StyledSettings = ssFamily;
+  testCheckBox.TextSettings.Font.Size=15;
+  testCheckBox.TextSettings.FontColor=clAlphaColor.clHexToColor('#cc0000');
+  testCheckBox.Align = Altop;
+  testCheckBox.isChecked = false;
+  
+  testCheckBox2 = MyForm.AddNewCheckBox(MyForm,'testCheckBox2','Watching movie');
+  testCheckBox2.StyledSettings = ssFamily;
+  testCheckBox2.TextSettings.Font.Size=15;
+  testCheckBox2.TextSettings.FontColor=clAlphaColor.clHexToColor('#cc0000');
+  testCheckBox2.Align = Altop;
+  testCheckBox2.isChecked = false;
+  
+  MyForm.AddNewEvent(testButton,tbeOnClick,'ButtonClicked');
+  MyForm.Run;
+}
