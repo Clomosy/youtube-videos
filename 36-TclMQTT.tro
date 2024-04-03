@@ -1,0 +1,54 @@
+var 
+ anaForm : TCLForm;
+ msjgonderMemo, msjListesi: TclMemo;
+ gonderBtn: TclButton;
+ durumlbl: TclLabel;
+ MyMQTT : TclMQTT;
+
+ void MyMQTTStatusChanged;
+ {
+   if (MyMQTT.Connected ) 
+    durumlbl.Text = 'Bağlandı' ;
+   
+   Else 
+    durumlbl.Text = 'Bağlantı koptu!';
+ }
+
+ void MyMQTTPublishReceived;
+ {
+   if(MyMQTT.ReceivedAlright) 
+     msjListesi.Lines.Add(MyMQTT.ReceivedMessage);
+ }
+
+ void BtnSendClick;
+ {
+  MyMQTT.Send(Clomosy.AppUserDisplayName+' : '+msjgonderMemo.Text);
+  msjListesi.Lines.Add('Sen: '+msjgonderMemo.Text);
+  msjgonderMemo.Text = '';
+ }
+ 
+{
+ anaForm = TCLForm.Create(Self);
+
+ durumlbl= anaForm.AddNewLabel(anaForm,'durumlbl','--');
+ durumlbl.Align = alTop;
+
+ msjListesi= anaForm.AddNewMemo(anaForm,'msjListesi','');
+ msjListesi.Align = alClient;
+ 
+ gonderBtn = anaForm.AddNewButton(anaForm,'gonderBtn','Gönder');
+ gonderBtn.Align = alTop;
+ anaForm.AddNewEvent(gonderBtn,tbeOnClick,'BtnSendClick');
+
+ msjgonderMemo= anaForm.AddNewMemo(anaForm,'msjgonderMemo','');
+ msjgonderMemo.Align = alTop;
+ 
+ MyMQTT = anaForm.AddNewMQTTConnection(anaForm,'MyMQTT');
+ anaForm.AddNewEvent(MyMQTT,tbeOnMQTTStatusChanged,'MyMQTTStatusChanged');
+ anaForm.AddNewEvent(MyMQTT,tbeOnMQTTPublishReceived,'MyMQTTPublishReceived');
+
+ MyMQTT.Channel = 'chat';
+ MyMQTT.Connect;
+ 
+ anaForm.Run;
+}
