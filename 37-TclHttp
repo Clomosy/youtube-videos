@@ -1,0 +1,46 @@
+var
+ MyForm:TCLForm;
+ edtUrl : TclEdit;
+ memoBody, memoResult : TclMemo;
+ postBtn, getBtn: TclButton;
+ MyHttp : TclHttp;
+ str : TclStringList;
+ 
+void getClick;
+{
+  memoResult.Text = MyHttp.GetRequest(edtUrl.text);
+}
+
+void postClick;
+{
+ str = Clomosy.StringListNew;
+ str.Add(memoBody.Text);
+ memoResult.Text = MyHttp.PostRequest(edtUrl.Text, str);
+}
+
+{
+  MyForm = TCLForm.Create(Self);
+  
+  edtUrl = MyForm.AddNewEdit(MyForm,'edtUrl','Write Http Url');
+  edtUrl.Align = alMostTop;
+  edtUrl.Text = 'http://httpbin.org/get';
+  
+  memoBody = MyForm.AddNewMemo(MyForm,'memoBody', '');
+  memoBody.Align = alTop;
+  
+  memoResult = MyForm.AddNewMemo(MyForm,'memoResult','');
+  memoResult.TextSettings.WordWrap = True;
+  memoResult.Align = alBottom;
+  memoResult.Height = 350;
+  
+  postBtn = MyForm.AddNewButton(MyForm,'postBtn','Post');
+  postBtn.Align = AlTop;
+  MyForm.AddNewEvent(postBtn,tbeOnClick,'postClick');
+  
+  getBtn = MyForm.AddNewButton(MyForm,'getBtn','Get');
+  getBtn.Align = AlTop;
+  MyForm.AddNewEvent(getBtn,tbeOnClick,'getClick');
+  
+  MyHttp = TclHttp.Create(Nil);
+  MyForm.Run;
+}
