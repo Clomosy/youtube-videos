@@ -1,0 +1,36 @@
+var
+  MyForm : TclForm; 
+  clRest : TCLRest;
+  btn : TCLButton;
+
+void GetPostMethod;
+{
+  clRest.Execute;
+  ShowMessage(clRest.Response);
+}
+
+{
+  MyForm = TclForm.Create(Self);
+  
+  btn = MyForm.AddNewButton(MyForm,'btn', 'Click');
+  MyForm.AddNewEvent(btn, tbeOnClick, 'GetPostMethod');
+  
+  clRest=TCLRest.Create;
+/* 
+  // Post
+  clRest.BaseURL = 'https://dummyjson.com/auth/login';
+  clRest.Accept = 'application/json';
+  clRest.Method = rmPOST;
+  clRest.AddBody('{"username":
+"kminchelle","password":"0lelplR"}','application/json');
+  //clRest.AddHeader('Content-Type','application/json');
+*/  
+ 
+  // Get
+  clRest.BaseURL = 'https://dummyjson.com/auth/me';
+  clRest.Accept = 'application/json';
+  clRest.Method = rmGET;
+  clRest.AddHeader('Authorization','Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInVzZXJuYW1lIjoia21pbmNoZWxsZSIsImVtYWlsIjoia21pbmNoZWxsZUBxcS5jb20iLCJmaXJzdE5hbWUiOiJKZWFubmUiLCJsYXN0TmFtZSI6IkhhbHZvcnNvbiIsImdlbmRlciI6ImZlbWFsZSIsImltYWdlIjoiaHR0cHM6Ly9yb2JvaGFzaC5vcmcvSmVhbm5lLnBuZz9zZXQ9c2V0NCIsImlhdCI6MTcxMjIzODAzNiwiZXhwIjoxNzEyMjQxNjM2fQ.Cd9cJ7Gj1KlajlGTyXqDeHCD-3BL9SVrTatKF8Ud-Vs');
+
+  MyForm.Run;
+}
