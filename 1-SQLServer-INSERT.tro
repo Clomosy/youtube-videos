@@ -1,0 +1,39 @@
+var
+  MyForm : TclForm;
+  edtRegionID, edtRegionDesc : TclEdit;
+  btnInsert : TclButton;
+  insertQuery : TclSqlQuery;
+  
+void InsertToDatabase;
+{
+  try
+  {
+    Clomosy.DBSQLServerQuery.Sql.Text = 'INSERT INTO Region (RegionID, RegionDescription) VALUES ('+edtRegionID.Text+', '+QuotedStr(edtRegionDesc.Text)+')';
+    Clomosy.DBSQLServerQuery.ExecSql;
+    ShowMessage('Veri ekleme başarılı');
+  }
+  except
+  {
+    ShowMessage('Exception class: '+LastExceptionClassName+' Exception Message: ' +LastExceptionMessage);
+  }
+}
+  
+{
+  MyForm = TclForm.Create(Self);
+  
+  edtRegionID = MyForm.AddNewEdit(MyForm, 'edtRegionID', 'RegionID');
+  edtRegionID.Margins.Right = 150;
+  
+  edtRegionDesc = MyForm.AddNewEdit(MyForm, 'edtRegionDesc', 'RegionDescription');
+  edtRegionDesc.Margins.Left = 150;
+  
+  btnInsert = MyForm.AddNewButton(MyForm,'btnInsert', 'Insert');
+  btnInsert.Align = alBottom;
+  MyForm.AddNewEvent(btnInsert, tbeOnClick, 'InsertToDatabase');
+  
+  insertQuery = TclSqlQuery.Create(nil);
+  Clomosy.DBSQLServerConnect('SQL Server', 'ServerName', 'UserName', 'Password', 'DbName', Port);
+  insertQuery.Connection = Clomosy.DBSQLServerConnection;
+
+  MyForm.Run;
+}

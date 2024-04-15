@@ -1,0 +1,40 @@
+ Var   
+  MyForm:TclForm;
+  testListview : TClListView;
+  selectQuery : TClSqlQuery;
+  
+void AddDataToListview
+{
+  try
+  {
+    selectQuery.SQL.Text = 'SELECT CategoryName as MAIN_TEXT, Description as SUB_TEXT from Categories';
+    selectQuery.Open;
+    if (selectQuery.Found)
+    {
+      testListview.clLoadListViewDataFromDataset(selectQuery);
+    }
+    else
+    {
+      ShowMessage('Kayıt bulunamadı!');
+    }
+  }
+  finally
+  {
+    selectQuery.Free;
+    selectQuery.Close;
+  }
+}
+
+{
+  MyForm = TclForm.Create(Self);
+  
+  testListview = MyForm.AddNewListView(MyForm,'testListview');
+  testListview.Align = alClient;
+  
+  selectQuery = TClSqlQuery.Create(nil);
+  Clomosy.DBSQLServerConnect('SQL Server', 'ServerName', 'UserName', 'Password', 'DbName', Port);
+  selectQuery.Connection = Clomosy.DBSQLServerConnection;
+  
+  AddDataToListview;
+  MyForm.Run;
+}
