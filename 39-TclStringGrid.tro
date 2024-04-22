@@ -1,0 +1,48 @@
+Var   
+  GridForm:TclForm;
+ MyGrid:TclStringGrid;
+ selectQuery : TClSqlQuery;
+  
+ void SetupGridColumns;
+ {
+   MyGrid.Columns[0].Header = 'Kategori İsmi';
+   MyGrid.Columns[1].Header = 'Açıklama';
+ }
+ 
+void AddDataToGrid
+{
+  try
+  {
+    selectQuery.SQL.Text = 'SELECT CategoryName , Description from Categories';
+    selectQuery.Open;
+    if (selectQuery.Found)
+    {
+      GridForm.RemoveGridBinding('mylink');
+      GridForm.AddNewGridBinding(MyGrid,selectQuery, 'mylink');
+      SetupGridColumns;
+    }
+    else
+    {
+      ShowMessage('Kayıt bulunamadı!');
+    }
+  }
+  except
+  {
+    ShowMessage('Exception class: '+LastExceptionClassName+' Exception Message: ' +LastExceptionMessage);
+  }
+}
+{
+  GridForm = TClForm.Create(Self);
+  
+  MyGrid = GridForm.AddNewStringGrid(GridForm, 'MyGrid');
+  MyGrid.Align = alClient;
+  MyGrid.ReadOnly = TRUE;
+  
+  selectQuery = TClSqlQuery.Create(nil);
+  Clomosy.DBSQLServerConnect('SQL Server', 'ServerName', 'UserName', 'Password', 'DbName', Port);
+  selectQuery.Connection = Clomosy.DBSQLServerConnection;
+  
+  AddDataToGrid;
+  
+  GridForm.Run;
+}
