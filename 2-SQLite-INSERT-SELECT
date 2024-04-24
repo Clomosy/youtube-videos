@@ -1,0 +1,59 @@
+var
+  MyForm : TclForm;
+  edtCategoryName, edtDescription : TclEdit;
+  btnInsert : TclButton;
+  testListview : TClListView;
+  Qry : TClSQLiteQuery;
+ 
+void GetData;
+{
+  try
+  {
+    Qry = Clomosy.DBSQLiteQueryWith('SELECT CategoryName as MAIN_TEXT, Description as SUB_TEXT FROM Categories');
+    Qry.OpenOrExecute;
+    testListview.clLoadListViewDataFromDataset(Qry);
+  }
+  except
+  {
+    ShowMessage('Exception class: '+LastExceptionClassName+' Exception Message: ' +LastExceptionMessage);
+  } 
+}
+
+void InsertToDatabase;
+{
+  try
+  {
+    Clomosy.DBSQLiteQuery.SQL.Text = 'INSERT INTO Categories (CategoryName, Description) VALUES ('+QuotedStr(edtCategoryName.Text)+', '+QuotedStr(edtDescription.Text)+')';
+    Clomosy.DBSQLiteQuery.OpenOrExecute;
+    GetData;
+    ShowMessage('Veri ekleme başarılı');
+  }
+  except
+  {
+    ShowMessage('Exception class: '+LastExceptionClassName+' Exception Message: ' +LastExceptionMessage);
+  } 
+}
+
+
+{
+  MyForm = TclForm.Create(Self);
+  
+  edtCategoryName = MyForm.AddNewEdit(MyForm, 'edtCategoryName', 'CategoryName');
+  edtCategoryName.Align = alTop;
+  
+  edtDescription = MyForm.AddNewEdit(MyForm, 'edtDescription', 'Description');
+  edtDescription.Align = alTop;
+  
+  testListview = MyForm.AddNewListView(MyForm,'testListview');
+  testListview.Align = alClient;
+
+  btnInsert = MyForm.AddNewButton(MyForm,'btnInsert', 'Insert');
+  btnInsert.Align = alBottom;
+  MyForm.AddNewEvent(btnInsert, tbeOnClick, 'InsertToDatabase');
+  
+  Clomosy.DBSQLiteConnect(Clomosy.AppFilesPath + 'ClomosyDatabase.db3', '');
+  
+  GetData;
+  
+  MyForm.Run;
+}
