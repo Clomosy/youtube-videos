@@ -1,0 +1,59 @@
+var
+  MyForm : TclForm;
+  edtProductID, edtPrice : TclEdit;
+  btnUpdate : TclButton;
+  testListview : TClListView;
+  query : TclSQLiteQuery;
+ 
+void GetData;
+{
+  try
+    query = Clomosy.DBSQLiteQueryWith('SELECT ProductName  as MAIN_TEXT, Price as SUB_TEXT FROM Products');
+    query.OpenOrExecute;
+    testListview.clLoadListViewDataFromDataset(query);
+  except
+    ShowMessage('Exception class: '+LastExceptionClassName+' Exception Message: ' +LastExceptionMessage);
+  } 
+}
+
+void UpdateData;
+{
+  try
+    Clomosy.DBSQLiteQuery.SQL.Text = 'UPDATE Products SET Price = ' +edtPrice.Text+ ' WHERE ProductID = ' +edtProductID.Text;
+    Clomosy.DBSQLiteQuery.OpenOrExecute;
+    GetData;
+    ShowMessage('Veri güncelleme başarılı!');
+  except
+    ShowMessage('Exception class: '+LastExceptionClassName+' Exception Message: ' +LastExceptionMessage);
+  } 
+}
+
+
+
+
+
+
+
+{
+  MyForm = TclForm.Create(Self);
+  
+  edtProductID = MyForm.AddNewEdit(MyForm, 'edtProductID', 'ProductID');
+  edtProductID.Align = alTop;
+  
+  edtPrice = MyForm.AddNewEdit(MyForm, 'edtPrice', 'New Price');
+  edtPrice.Align = alTop;
+  
+  testListview = MyForm.AddNewListView(MyForm,'testListview');
+  testListview.Align = alClient;
+
+  btnUpdate = MyForm.AddNewButton(MyForm,'btnUpdate', 'Update');
+  btnUpdate.Align = alBottom;
+  MyForm.AddNewEvent(btnUpdate, tbeOnClick, 'UpdateData');
+
+  Clomosy.DBSQLiteConnect(Clomosy.AppFilesPath + 'ClomosyDatabase.db3', '');
+  
+  GetData;
+  
+  MyForm.Run;
+}
+
