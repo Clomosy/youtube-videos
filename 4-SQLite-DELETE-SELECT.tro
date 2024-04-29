@@ -1,0 +1,47 @@
+Var   
+  MyForm:TclForm;
+  testListview : TClListView;
+  deleteBtn : TCLButton;
+  query : TclSQLiteQuery;
+  
+void GetData;
+{
+  try
+    query = Clomosy.DBSQLiteQueryWith('SELECT ProductID as RECORD_GUID, ProductName as MAIN_TEXT FROM Products');
+    query.OpenOrExecute;
+    testListview.clLoadListViewDataFromDataset(query);
+  except
+    ShowMessage('Exception class: ' + LastExceptionClassName + 'Exception message: ' + LastExceptionMessage);
+  }
+}
+
+void DeleteData;
+{
+  try
+    Clomosy.DBSQLiteQuery.SQL.Text = 'DELETE FROM Products WHERE ProductID = ' + testListview.clSelectedItemData('RECORD_GUID');
+    Clomosy.DBSQLiteQuery.OpenOrExecute;
+    
+    GetData;
+    
+    ShowMessage('Veri silme başarılı!');
+  except 
+    ShowMessage('Exception class: ' + LastExceptionClassName + 'Exception message: ' + LastExceptionMessage);
+  }
+}
+
+{
+  MyForm = TclForm.Create(Self);
+  
+  testListview = MyForm.AddNewListView(MyForm,'testListview');
+  testListview.Align = alClient;
+  
+  deleteBtn = MyForm.AddNewButton(MyForm,'deleteBtn', 'Delete');
+  deleteBtn.Align = alBottom;
+  MyForm.AddNewEvent(deleteBtn,tbeOnClick,'DeleteData');
+  
+  Clomosy.DBSQLiteConnect(Clomosy.AppFilesPath + 'ClomosyDatabase.db3', '');
+  
+  GetData;
+  
+  MyForm.Run;
+}
