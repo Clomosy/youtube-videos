@@ -1,0 +1,91 @@
+var
+  MyForm: TclForm;
+  noteMemo: TCLMemo;
+  savebutton: TClPButton;
+  idEdit,nameEdit: TclEdit;
+  MyFileStr: String;
+  jsonQuery: TclJsonQuery;
+
+void OnClickButton;
+{
+  if (idEdit.Text == '')
+    exit;
+    
+  jsonQuery = TclJsonQuery.Create(nil);
+  
+  try
+    try
+      jsonQuery = Clomosy.ClDataSetFromJSON(noteMemo.Text);
+        with jsonQuery do
+        {
+          if (RecordCount > 0 )
+          {
+            Filter = 'id = '+ QuotedStr(idEdit.Text);
+            Filtered = True;
+            
+            if ((Found) && (nameEdit.Text <> ''))
+                Edit;
+            else if ((Found) && (nameEdit.Text == ''))
+                Delete;
+            else
+              Insert;
+            
+            if (nameEdit.Text <> '')
+            {
+              FieldByName('id').AsString = idEdit.Text;
+              FieldByName('name').AsString = nameEdit.Text;     
+            }
+            
+            Filtered = False;
+            noteMemo.Text = '';
+            noteMemo.Lines.Add(jsonQuery.getJSONString);
+            
+            noteMemo.Lines.SavetoFile(MyFileStr,0);      
+          }
+      
+
+          else
+          {
+           noteMemo.Text = '{"id":" '+idEdit.Text+' ","name":" '+nameEdit.Text+' "}';
+           noteMemo.Lines.SavetoFile(MyFileStr,0);
+          }
+        }
+    except
+      ShowMessage('[001] Exception Class: '+LastExceptionClassName+' Exception Message: '+LastExceptionMessage);
+      exit;
+    }
+  
+  finally
+    idEdit.Text = '';
+    nameEdit.Text = '';
+  
+    ShowMessage('Dosyaya Kaydedildi');
+  }
+}
+
+{
+  MyForm = TclForm.Create(Self);
+  
+  noteMemo = MyForm.AddNewMemo(MyForm, 'noteMemo', '');
+  noteMemo.Align = alMostTop;
+  noteMemo.Height = 300;
+  noteMemo.TextSettings.WordWrap = True;
+
+  idEdit = MyForm.AddNewEdit(MyForm,'idEdit','Id');
+  idEdit.Align = alTop;
+
+  nameEdit = MyForm.AddNewEdit(MyForm,'nameEdit','İsim');
+  nameEdit.Align = alTop;
+ 
+  savebutton = MyForm.AddNewButton(MyForm,'savebutton','Kaydet');
+  MyForm.AddNewEvent(savebutton,tbeOnClick,'OnClickButton');
+  
+  MyFileStr = clPathCombine('MyFile.json', Clomosy.AppFilesPath);
+
+  if (clFileExists('MyFile.json', Clomosy.AppFilesPath)) 
+    noteMemo.lines.LoadFromFile(MyFileStr,0);
+  else
+    noteMemo.lines.SavetoFile(MyFileStr,0);
+
+  MyForm.Run;
+}
