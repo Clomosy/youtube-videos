@@ -1,0 +1,36 @@
+var
+  MyForm : TclForm;
+  edtCategoryID, edtName : TclEdit;
+  btnInsert : TclButton;
+  insertQuery : TclSqlQuery;
+  
+void InsertToDatabase;
+{
+  try
+    Clomosy.DBSQLServerQuery.Sql.Text = 'INSERT INTO Category (CategoryID, Name) VALUES ('+edtCategoryID.Text+', '+QuotedStr(edtName.Text)+');';
+    Clomosy.DBSQLServerQuery.ExecSql;
+    ShowMessage('Veri ekleme başarılı');
+  except
+    ShowMessage('Exception class: '+LastExceptionClassName+' Exception Message: ' +LastExceptionMessage);
+  }
+}
+  
+{
+  MyForm = TclForm.Create(Self);
+  
+  edtCategoryID = MyForm.AddNewEdit(MyForm, 'edtCategoryID', 'CategoryID');
+  edtCategoryID.Margins.Right = 150;
+  
+  edtName = MyForm.AddNewEdit(MyForm, 'edtName', 'Name');
+  edtName.Margins.Left = 150;
+  
+  btnInsert = MyForm.AddNewButton(MyForm,'btnInsert', 'Insert');
+  btnInsert.Align = alBottom;
+  MyForm.AddNewEvent(btnInsert, tbeOnClick, 'InsertToDatabase');
+  
+  insertQuery = TclSqlQuery.Create(nil);
+  Clomosy.DBSQLServerConnect('SQL Server', 'clomosy.database.windows.net', 'Clomosy', '1234abc.', 'ClomosyDatabase', 1433);
+  insertQuery.Connection = Clomosy.DBSQLServerConnection;
+
+  MyForm.Run;
+}

@@ -1,0 +1,39 @@
+var
+  MyForm : TclForm;
+  edtProductID, edtListPrice : TclEdit;
+  btnUpdate : TclButton;
+  updateQuery : TclSqlQuery;
+  
+void UpdateFromDatabase;
+{
+  try
+  
+    updateQuery.Sql.Text = 'UPDATE SalesLT.Product SET ListPrice = ' +edtListPrice.Text+ 'WHERE ProductID = ' +edtProductID.Text;
+    updateQuery.ExecSql;
+    ShowMessage('Veri güncelleme başarılı');
+  
+  except
+  
+    ShowMessage('Exception class: '+LastExceptionClassName+' Exception Message: ' +LastExceptionMessage);
+  }
+}
+  
+{
+  MyForm = TclForm.Create(Self);
+  
+  edtProductID = MyForm.AddNewEdit(MyForm, 'edtProductID', 'ProductID');
+  edtProductID.Margins.Right = 150;
+  
+  edtListPrice = MyForm.AddNewEdit(MyForm, 'edtListPrice', 'New ListPrice');
+  edtListPrice.Margins.Left = 150;
+  
+  btnUpdate = MyForm.AddNewButton(MyForm,'btnUpdate', 'Update');
+  btnUpdate.Align = alBottom;
+  MyForm.AddNewEvent(btnUpdate, tbeOnClick, 'UpdateFromDatabase');
+  
+  updateQuery = TclSqlQuery.Create(nil);
+  Clomosy.DBSQLServerConnect('SQL Server', 'clomosy.database.windows.net', 'Clomosy', '1234abc.', 'ClomosyDatabase', 1433);
+  updateQuery.Connection = Clomosy.DBSQLServerConnection;
+
+  MyForm.Run;
+}
