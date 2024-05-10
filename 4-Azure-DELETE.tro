@@ -1,0 +1,43 @@
+Var   
+  MyForm:TclForm;
+  testListview : TClListView;
+  deleteBtn : TCLButton;
+  query : TClSqlQuery;
+
+void GetData;
+{
+  try
+    query.SQL.Text = 'SELECT CategoryID as RECORD_GUID, Name as MAIN_TEXT from Category';
+    query.Open;
+    testListview.clLoadListViewDataFromDataset(query);
+  finally
+    query.Close;
+  }
+}
+void DeleteFromListView;
+{
+  try
+    query.Sql.Text = 'DELETE Category WHERE CategoryID =' +testListview.clSelectedItemData('RECORD_GUID');
+    query.ExecSql;
+    ShowMessage('Veri silme başarılı');
+    GetData;
+  finally
+    query.Close;
+  }
+}
+{
+  MyForm = TclForm.Create(Self);
+  
+  testListview = MyForm.AddNewListView(MyForm,'testListview');
+  testListview.Align = alClient;
+  
+  deleteBtn = MyForm.AddNewButton(MyForm,'deleteBtn', 'Delete');
+  deleteBtn.Align = alBottom;
+  MyForm.AddNewEvent(deleteBtn,tbeOnClick,'DeleteFromListView');
+  
+  query = TClSqlQuery.Create(nil);
+  Clomosy.DBSQLServerConnect('SQL Server', 'clomosy.database.windows.net', 'Clomosy', '1234abc.', 'ClomosyDatabase', 1433);
+  query.Connection = Clomosy.DBSQLServerConnection;
+  GetData;
+  MyForm.Run;
+}
