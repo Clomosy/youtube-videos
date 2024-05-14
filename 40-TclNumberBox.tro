@@ -1,0 +1,24 @@
+Var   
+ MyForm:TclForm;
+ tstNumberBox : TClNumberBox;
+ lblDisplay : TclLabel;
+ 
+void OnChange;
+{
+  lblDisplay.Text = IntToStr(tstNumberBox.Value);
+}
+ 
+{
+  MyForm = TclForm.Create(Self);
+  lblDisplay = MyForm.AddNewLabel(MyForm,'lblDisplay','Sayı');
+  lblDisplay.Align = alCenter;
+
+  tstNumberBox = MyForm.AddNewNumberBox(MyForm,'tstNumberBox');
+  tstNumberBox.Margins.Bottom = 40;
+  tstNumberBox.Value = 9;
+  tstNumberBox.Min = 0; 
+  tstNumberBox.Max = 10; 
+  MyForm.AddNewEvent(tstNumberBox,tbeOnChange,'OnChange');
+  
+  MyForm.Run;
+}
