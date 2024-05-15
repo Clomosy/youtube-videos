@@ -1,0 +1,18 @@
+var
+   tstSwitch : TclSwitch;
+   MyForm : TclForm;
+   
+ void switchState;
+ {
+   ShowMessage(tstSwitch.IsChecked);
+ }
+
+ {
+   MyForm = TclForm.Create(Self);
+   
+   tstSwitch = MyForm.AddNewSwitch(MyForm,'tstSwitch');
+  
+   tstSwitch.IsChecked = True; 
+   MyForm.AddNewEvent(tstSwitch,tbeOnClick,'switchState');
+   MyForm.Run;
+ }
