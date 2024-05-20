@@ -1,0 +1,17 @@
+ var
+   MyForm:TclForm;
+   testButton : TclButton;
+ 
+ void OnClick;
+ {
+   ShowMessage(testButton.Text);
+ }
+ 
+ {
+   MyForm = TclForm.Create(Self);
+   
+   testButton = MyForm.AddNewButton(MyForm, 'testButton', 'Click');
+   MyForm.AddNewEvent(testButton, tbeOnClick, 'OnClick')
+   
+   MyForm.Run;
+ }
