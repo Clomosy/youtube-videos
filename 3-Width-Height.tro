@@ -1,0 +1,12 @@
+var
+  MyForm : TclForm;
+  testBtn : TclButton;
+{
+  MyForm = TclForm.Create(Self);
+  
+  testBtn = MyForm.AddNewButton(MyForm, 'testBtn' , 'Clomosy');
+  testBtn.Width = 100;
+  testBtn.Height = 100;
+  
+  MyForm.Run;
+}
