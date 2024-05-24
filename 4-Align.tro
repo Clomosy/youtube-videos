@@ -1,0 +1,10 @@
+var  
+  MyForm:TclForm;  
+  testBtn : TCLButton;  
+{  
+  MyForm=TclForm.Create(Self);  
+  testBtn = MyForm.AddNewButton(MyForm, 'testBtn','Click');  
+  testBtn.Align = alTop;
+  MyForm.Run; 
+  
+}
