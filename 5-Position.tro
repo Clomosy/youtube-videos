@@ -1,0 +1,14 @@
+Var  
+ MyForm:TclForm;
+ testButton : TclButton;
+
+{
+ MyForm=TclForm.Create(self);
+
+ testButton =MyForm.AddNewButton(MyForm,'testButton','Clomosy');
+ testButton.Align = alNone;
+ testButton.Position.X = 30;
+ testButton.Position.Y = 100;
+ 
+ MyForm.Run;
+}
