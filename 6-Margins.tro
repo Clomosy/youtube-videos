@@ -1,0 +1,9 @@
+ var  
+  MyForm:TclForm;  
+  testBtn : TCLButton;  
+{  
+  MyForm=TclForm.Create(Self);  
+  testBtn = MyForm.AddNewButton(MyForm, 'testBtn','Click');  
+  testBtn.Margins.Top = 100;
+  MyForm.Run; 
+}
