@@ -1,0 +1,11 @@
+var  
+  MyForm:TclForm;  
+  testLabel : TCLLabel;  
+{  
+  MyForm=TclForm.Create(Self);  
+  testLabel = MyForm.AddNewLabel(MyForm, 'testLabel', 'Deneme');  
+  testLabel.StyledSettings = ssFamily;
+  testLabel.TextSettings.Font.Size = 20;
+  testLabel.TextSettings.FontColor = clAlphaColor.clHexToColor('#fe7171');
+  MyForm.Run; 
+}
