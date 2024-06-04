@@ -4,7 +4,7 @@ var
   testPanel : TCLPanel;
 {
   MyForm=TclForm.Create(self);
-  testPanel = MyForm.AddNewPanel(MyForm, 'testPanel',' ');
+  testPanel = MyForm.AddNewPanel(MyForm, 'testPanel');
   testPanel.Height = 50;
   
   testEdit = MyForm.AddNewEdit(testPanel,'testEdit','Write something...');
