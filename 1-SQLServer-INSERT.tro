@@ -7,13 +7,10 @@ var
 void InsertToDatabase;
 {
   try
-  {
     Clomosy.DBSQLServerQuery.Sql.Text = 'INSERT INTO Region (RegionID, RegionDescription) VALUES ('+edtRegionID.Text+', '+QuotedStr(edtRegionDesc.Text)+')';
     Clomosy.DBSQLServerQuery.ExecSql;
     ShowMessage('Veri ekleme başarılı');
-  }
   except
-  {
     ShowMessage('Exception class: '+LastExceptionClassName+' Exception Message: ' +LastExceptionMessage);
   }
 }

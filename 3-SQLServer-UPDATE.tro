@@ -7,13 +7,10 @@ var
 void UpdateFromDatabase;
 {
   try
-  {
     updateQuery.Sql.Text = 'UPDATE Products SET UnitPrice = ' +edtUnitPrice.Text+ 'WHERE ProductID = ' +edtProductID.Text;
     updateQuery.ExecSql;
     ShowMessage('Veri güncelleme başarılı');
-  }
   except
-  {
     ShowMessage('Exception class: '+LastExceptionClassName+' Exception Message: ' +LastExceptionMessage);
   }
 }

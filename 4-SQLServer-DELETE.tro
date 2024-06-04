@@ -19,14 +19,11 @@ void GetData;
 void DeleteFromListView;
 {
   try
-  {
     query.Sql.Text = 'DELETE Categories WHERE CategoryID =' +testListview.clSelectedItemData('RECORD_GUID');
     query.ExecSql;
     ShowMessage('Veri silme başarılı');
     GetData;
-  }
   finally
-  {
     query.Close;
   }
 }

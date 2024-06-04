@@ -5,16 +5,13 @@ var
   password = '';
   
   try
-  {
     Clomosy.DBSQLiteConnect(database , password);
     
     Clomosy.DBSQLiteQuery.Sql.Text = 'CREATE TABLE Categories(CategoryName Text, Description Text)';
     Clomosy.DBSQLiteQuery.OpenOrExecute;
     
     ShowMessage('Veri tabanına tablo ekleme işlemi başarılı!');
-  } 
   except
-  {
    ShowMessage('Exception Class: '+LastExceptionClassName+' Exception Message: '+LastExceptionMessage);
   }
 }

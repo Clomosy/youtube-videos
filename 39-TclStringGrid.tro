@@ -12,7 +12,6 @@ Var
 void AddDataToGrid
 {
   try
-  {
     selectQuery.SQL.Text = 'SELECT CategoryName , Description from Categories';
     selectQuery.Open;
     if (selectQuery.Found)
@@ -25,9 +24,7 @@ void AddDataToGrid
     {
       ShowMessage('Kayıt bulunamadı!');
     }
-  }
   except
-  {
     ShowMessage('Exception class: '+LastExceptionClassName+' Exception Message: ' +LastExceptionMessage);
   }
 }

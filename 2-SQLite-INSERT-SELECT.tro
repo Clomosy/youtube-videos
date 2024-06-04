@@ -22,14 +22,11 @@ void GetData;
 void InsertToDatabase;
 {
   try
-  {
     Clomosy.DBSQLiteQuery.SQL.Text = 'INSERT INTO Categories (CategoryName, Description) VALUES ('+QuotedStr(edtCategoryName.Text)+', '+QuotedStr(edtDescription.Text)+')';
     Clomosy.DBSQLiteQuery.OpenOrExecute;
     GetData;
     ShowMessage('Veri ekleme başarılı');
-  }
   except
-  {
     ShowMessage('Exception class: '+LastExceptionClassName+' Exception Message: ' +LastExceptionMessage);
   } 
 }

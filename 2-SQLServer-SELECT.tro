@@ -6,7 +6,6 @@
 void AddDataToListview
 {
   try
-  {
     selectQuery.SQL.Text = 'SELECT CategoryName as MAIN_TEXT, Description as SUB_TEXT from Categories';
     selectQuery.Open;
     if (selectQuery.Found)
@@ -17,9 +16,7 @@ void AddDataToListview
     {
       ShowMessage('Kayıt bulunamadı!');
     }
-  }
   finally
-  {
     selectQuery.Free;
     selectQuery.Close;
   }
