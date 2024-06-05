@@ -1,0 +1,19 @@
+var
+ MyForm:TclForm;
+ testButton: TclButton;
+ testEdit: TclEdit;
+
+void BtnOnClick;
+{
+ testEdit.SetFocus;
+}
+{
+ MyForm = TclForm.Create(Self);
+ testButton= MyForm.AddNewButton(MyForm,'testButton','Click');
+ MyForm.AddNewEvent(testButton,tbeOnClick,'BtnOnClick');
+
+ testEdit= MyForm.AddNewEdit(MyForm,'testEdit','Edit');
+ testEdit.Align = alTop;
+
+ MyForm.Run;
+}
