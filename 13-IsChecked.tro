@@ -1,0 +1,12 @@
+ var
+   MyForm:TclForm;
+   testCheckBox : TClCheckBox;
+ {
+   MyForm = TclForm.Create(Self);
+   
+   testCheckBox = MyForm.AddNewCheckBox(MyForm,'testCheckBox','Clomosy');
+   testCheckBox.Align = alCenter;
+   testCheckBox.IsChecked = False;
+   
+   MyForm.Run;
+ }
