@@ -1,0 +1,11 @@
+var 
+Myform:TclForm;
+Label01:TCLLabel;
+{
+  Myform=Tclform.Create(Self);
+  Label01=Myform.AddNewLabel(MyForm,'Label01','Clomosy Clomosy Clomosy ');
+  Label01.AutoSize = true;
+  Label01.WordWrap = True;
+  
+  MyForm.Run;
+}
