@@ -5,7 +5,7 @@ var
 {
   MyForm = TclForm.Create(Self);
   
-  testBtn = MyForm.AddNewButton(MyForm, testBtn , '');
+  testBtn = MyForm.AddNewButton(MyForm, 'testBtn' , '');
   testBtn.Caption = 'Clomosy';
   
   MyForm.Run;
