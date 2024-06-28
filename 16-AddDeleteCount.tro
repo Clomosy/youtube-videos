@@ -1,0 +1,46 @@
+var
+
+  MyForm: TclForm;
+  Memo: TclMemo;
+  ButtonAdd: TclButton;
+  ButtonDelete: TclButton;
+  TsTLabel: TclLabel;
+  
+
+void ButtonAddClick;
+{
+  Memo.Lines.Add('Yeni Satır');
+  TsTLabel.Caption = 'Toplam Satır Sayısı: ' + IntToStr(Memo.Lines.Count);
+}
+
+
+void ButtonDeleteClick;
+{
+  if (Memo.Lines.Count > 0)
+    Memo.Lines.Delete(0)  // İlk satırı siler
+  else
+    ShowMessage('Silinecek satır yok');
+  TsTLabel.Caption = 'Toplam Satır Sayısı: ' + IntToStr(Memo.Lines.Count);
+}
+
+
+{
+  MyForm=TclForm.Create(Self);
+  
+  Memo=MyForm.AddNewMemo(MyForm,'Memo', '');
+  Memo.Align=alFit;
+  
+  ButtonAdd=MyForm.AddNewButton(MyForm,'ButtonAdd', 'SATIR EKLE');
+  ButtonAdd.Align=alMostBottom;
+  MyForm.AddNewEvent(buttonAdd,tbeOnClick,'ButtonAddClick');
+  
+  
+  ButtonDelete=MyForm.AddNewButton(MyForm,'ButtonDelete','SATIR SİL');
+  ButtonDelete.Align=alMostBottom;
+  MyForm.AddNewEvent(ButtonDelete,tbeOnClick,'ButtonDeleteClick');
+  
+  
+  TsTLabel=MyForm.AddNewLabel(MyForm,'TsTLabel','SATIR SAYISI');
+  
+ MyForm.Run;
+}
