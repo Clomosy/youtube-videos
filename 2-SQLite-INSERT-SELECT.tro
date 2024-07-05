@@ -8,13 +8,10 @@ var
 void GetData;
 {
   try
-  {
     Qry = Clomosy.DBSQLiteQueryWith('SELECT CategoryName as MAIN_TEXT, Description as SUB_TEXT FROM Categories');
     Qry.OpenOrExecute;
     testListview.clLoadListViewDataFromDataset(Qry);
-  }
   except
-  {
     ShowMessage('Exception class: '+LastExceptionClassName+' Exception Message: ' +LastExceptionMessage);
   } 
 }
