@@ -1,0 +1,60 @@
+var
+ MyForm:TCLForm;
+ cllabel : TclLabel;
+ clButton : TclButton;
+ 
+ void UserUI; // User UI baslangıc objelerı olusturmak.
+ {
+  cllabel = MyForm.AddNewLabel(MyForm,'cllabel','Data: 0');
+  cllabel.CLTagInt=0;
+  cllabel.Margins.Bottom = 70;
+  clButton = MyForm.AddNewButton(MyForm,'clButton','Click');
+  MyForm.AddNewEvent(clButton,tbeOnClick,'UserUIOnClick');
+ }
+ 
+ void UserUIOnClick; // Label daki sayının artması 
+ {
+  cllabel.CLTagInt=cllabel.CLTagInt + 1; 
+  cllabel.Text = 'Data: '+IntToStr(cllabel.CLTagInt);
+ }
+ 
+ 
+ void AdminUI; // admin giris yaparsa calısacak procedure
+ var
+ clChart : TClChart; 
+ {
+  clChart = MyForm.AddNewChart(MyForm,'clChart','AgeChart');
+  clChart.Charttype = clCPie;
+  clChart.XAxisText = 'Name';
+  clChart.ChartItemText = 'Age Chart';
+  clChart.ChartItemsValue = 'Age';
+  clChart.ChartTitle = 'Age Inc.';
+  clChart.clLoadDataFromJSONStr('[{"Name":"John","Age":21,"color":"clOrange"},{"Name":"Natasha","Age":27,"color":"clGold"}]'); // Grafiğe veri yüklemek ıcın 
+ }
+ 
+ 
+ void WindowsUI;
+ var
+  clStringGrid : TCLStringGrid;
+  clQuery:TClJSONQuery;
+ {
+  clStringGrid = MyForm.AddNewStringGrid(MyForm,'clStringGrid');
+  clQuery = Clomosy.ClDataSetFromJSON('[{"name":"John","surname":"Smith"},{"name":"Natasha","surname":"Oborin"}]');
+  MyForm.AddNewGridBinding(clStringGrid,clQuery, 'mylink'); // bir formda birden fazla birden fazla grid veya query. bağlantıya sonradan erişlmek için isimlendirme. 
+  clStringGrid.Columns[0].Width = 60;
+  clStringGrid.Columns[1].Width = 60;
+ }
+ 
+ 
+{
+  MyForm = TCLForm.Create(Self);
+  
+  if not (Clomosy.PlatformIsMobile) 
+    WindowsUI
+  else
+    if (Clomosy.AppUserProfile == 1)
+      AdminUI
+    else
+      UserUI;
+  MyForm.Run;
+}
