@@ -1,0 +1,11 @@
+var
+  MyForm:TCLForm;
+  proBtn1 : TClProButton;
+  {
+  MyForm = TCLForm.Create(Self);
+  proBtn1 = MyForm.AddNewProButton(MyForm,'proBtn1','TEST');
+  proBtn1.Align = alCenter;
+  proBtn1.clProSettings.BackgroundColor = clAlphaColor.clRed;
+  proBtn1.SetclProSettings(proBtn1.clProSettings);
+  MyForm.Run;
+  }
