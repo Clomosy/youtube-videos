@@ -1,0 +1,62 @@
+
+
+Var  
+  MyForm:TclForm; 
+  Button 2,Button3:TClProButton;
+  Label1:TCLLabel;
+
+void ekranaYaz;
+var
+sayi1,sayi2:Integer;
+metin1,metin2:string;
+ {
+  sayi1=4;
+  sayi2=2;
+  //if(sayi1=sayi2)//Syntax Error: Çift Eşittir Kullanılmalı.
+  if(sayi1==sayi2)
+  {
+    ShowMessage('Clomosy!!');
+  }
+  else
+  {
+    //ShowMessage("Merhaba Dünya");//Syntax Error: Tek tırnak kullanılmalı.
+    //ShowMessage('Ben'+20+'Yaşındayım');//Runtime Error : integer değerden string değere dönüşüm yapılmalı.
+    //metin1=sayi1;
+    //metin2=sayi2;
+    //Label1.text=sayi1+sayi2;//Runtime Error: Invalid class typecast.
+    //Label1.text=metin1+metin2;//Runtime Error: Invalid class typecast.
+    metin1=IntToStr(sayi1);
+    metin2=IntToStr(sayi2);
+    Label1.text=metin1+metin2;
+  }
+  //else if//Syntax Error: if-else if-else sırasına uyulmalı.
+  }
+ //}//Syntax Error: Fazla Parantez Kullanımı.
+{
+  MyForm=TclForm.Create(self);
+  
+  //olmayanButton=MyForm.AddNewProButton(MyForm, 'olmayanButton', '');//Unknown identifier or variable: Nesneler ve değişkenler oluşturulup kullanılmadan önce 'var' bloğunda tanımlanmalıdır.
+  
+  //Button3.onClick='ekranaYaz';//Runtime Error: Önce button oluşturulmalı.
+  //Button3=MyForm.AddNewProButton(MyForm, 'Button3', 'Ekrana Yaz');//Unknown identifier:Default olarak gelen değerler değiştirilmeli.
+  Button3=MyForm.AddNewProButton(MyForm, 'Button3', 'Ekrana Yaz');
+  //Button3=MyForm.AddNewProButton(MyForm, 'Button3', 'Ekrana Yaz');//A component name already exists: Nesne isimleri eşsiz olmalı.
+  //Button3.onClick='ekranaYaz';
+  MyForm.AddNewEvent(Button3,tbeOnClick,'ekranaYaz');
+  //Label1=MyForm.AddNewLabel(MyForm,'Label1');//Not enough actual parameters: Nesne oluşturulurken parametre sayısına dikkat edilmeli.
+  Label1=MyForm.AddNewLabel(MyForm,'Label1','Merhaba Dünya');
+  Label1.align=alTop;
+   
+  
+  Button2=MyForm.AddNewProButton(MyForm, 'Button2', 'Hatasız Geçiş');
+  Button2.Margins.Bottom=200;
+  MyForm.AddNewEvent(Button2,tbeOnClick,Selected Unit);
+    
+  void SelectedUnit;
+{
+  //Runtime Error: Unit çağırılmadan önce oluşturulmalı.
+  Clomosy.RunUnit('uHata');
+}
+
+  MyForm.Run;
+}
