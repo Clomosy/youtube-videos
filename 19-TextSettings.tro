@@ -1,0 +1,16 @@
+var
+  MyForm:TCLForm;
+  proBtn1 : TClProButton;
+
+{
+  MyForm = TCLForm.Create(Self);
+
+  proBtn1 = MyForm.AddNewProButton(MyForm,'proBtn1','TEST');
+  proBtn1.clProSettings.FontSize = 20;
+  proBtn1.clProSettings.TextSettings.Font.Style = [fsBold,fsItalic,fsUnderline];
+  proBtn1.clProSettings.FontColor = clAlphaColor.clHexToColor('#2a245c');
+  proBtn1.SetclProSettings(proBtn1.clProSettings);
+
+  MyForm.Run
+  
+}
