@@ -1,0 +1,32 @@
+var  
+MyForm:TclForm; 
+TestPanel : TclPanel; 
+TestImage :TCLImage; 
+url : String; 
+
+void HareketEttir; 
+{ 
+ TestImage.Position.X = MyForm.clSenderMousePosX; 
+ TestImage.Position.Y = MyForm.clSenderMousePosY/2; 
+}
+
+{ 
+ MyForm = TclForm.Create(Self); 
+ TestPanel = MyForm.AddNewPanel(MyForm,'TestPanel'); 
+ TestPanel.Align = alBottom; 
+ TestPanel.Height = 100; 
+
+ TestImage = MyForm.AddNewImage(MyForm,'TestImage'); 
+ url = 'https://clomosy.com/WildRun/arrowButton_Mobile.png'; 
+ MyForm.SetImage(TestImage, url); 
+ TestImage.Align = alNone; 
+ TestImage.Height = TestPanel.Height; 
+ TestImage.Width = TestPanel.Height; 
+ TestImage.Position.X = 0; 
+ TestImage.Position.Y = TestPanel.Height - (TestImage.Height); 
+ TestImage.RotationAngle = 180; 
+
+ MyForm.AddNewEvent(TestPanel,tbeOnMouseMove,'HareketEttir'); 
+
+ MyForm.Run;
+}
