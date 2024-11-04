@@ -1,0 +1,36 @@
+var 
+MyForm:TCLForm; 
+
+
+void KeyDown 
+{ 
+ if (MyForm.clSenderKeyChar == 32) 
+  { 
+   ShowMessage('Space Tuşuna Basıldı'); 
+  } 
+ else if (MyForm.clSenderKeyChar == 119) 
+  { 
+   ShowMessage('w Tuşuna Basıldı'); 
+  } 
+}
+
+
+void KeyUp 
+{ 
+ if (MyForm.clSenderKeyChar == 97) 
+  { 
+   ShowMessage('a Tuşundan Çekildi'); 
+  } 
+ else if (MyForm.clSenderKeyChar == 100) 
+  { 
+   ShowMessage('d Tuşundan Çekildi'); 
+  } 
+}
+
+
+{
+ MyForm = TCLForm.Create(Self); 
+ MyForm.AddNewEvent(MyForm, tbeOnKeyDown, 'KeyDown'); 
+ MyForm.AddNewEvent(MyForm, tbeOnKeyUp, 'KeyUp'); 
+ MyForm.Run;
+}
