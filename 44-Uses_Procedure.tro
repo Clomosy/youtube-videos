@@ -1,0 +1,17 @@
+uses uCalculateTransaction;
+
+var
+  value1, value2 : Integer;
+{
+  value1 = 10;
+  value2 = 20;
+  uCalculateTransaction.AddNumbers(value1, value2);
+}
+
+void AddNumbers(A,B: Integer);
+ var
+  Sum: Integer;
+   {
+      Sum=A+B;
+      ShowMessage('Total:' + IntToStr(Sum));
+   }
