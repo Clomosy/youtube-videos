@@ -1,0 +1,16 @@
+function Carpim(A,B:Integer):Integer;
+{
+  Result= A * B;
+}
+
+
+uses uCalculateTransaction;
+
+var 
+ Num1, Num2, Multi: Integer;
+  {
+    Num1=15;
+    Num2=10;
+    Multi=uCalculateTransaction.Carpim(Num1,Num2);
+    ShowMessage('Çarpım: ' + IntToStr(Multi));
+  }
