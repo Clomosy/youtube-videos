@@ -1,0 +1,42 @@
+function AddLayout(BMyForm,BLayout): TClLayout;
+ var
+  CustomLayout: TClLayout;
+   {
+     CustomLayout=BMyForm.AddNewLayout(BMyForm,BLayout);
+     CustomLayout.Align=alCenter;
+     CustomLayout.Height=BMyForm.clHeight/2;
+     CustomLayout.Width=BMyForm.clWidth/2;
+     Result=CustomLayout;
+   }
+   
+function AddButton(BMyForm,BLayout,BButton,BCaption): TCLButton;
+ var 
+  CustomButton:TCLButton;
+   {
+     CustomButton=BMyForm.AddnewButton(BLayout,BButton,BCaption);
+     CustomButton.Align=alBottom;
+     CustomButton.Height=BLayout.Height/4;
+     CustomButton.Margins.Bottom=10;
+     Result=CustomButton;
+   }
+
+uses uAddComponent; 
+ 
+ var 
+  MyForm:TclForm;
+  TestBtn1: TCLButton;
+  TestLayout1: TClLayout;
+  
+   void GetShow;
+    {
+      ShowMessage('Welcome');
+    }
+  
+  
+   {
+     MyForm=TclForm.Create(Self);
+     TestLayout1=uAddComponent.AddLayout(MyForm,'TestLayout1');
+     TestBtn1=uAddComponent.AddButton(MyForm,TestLayout1,'TestBtn1','Show');
+     MyForm.AddNewEvent(TestBtn1,tbeOnClick,'GetShow');
+     MyForm.Run;
+   }
