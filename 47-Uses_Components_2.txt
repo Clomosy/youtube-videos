@@ -1,0 +1,65 @@
+function addButton(BMyForm,BButton,BCaption): TCLButton;
+ var
+  customButton: TCLButton;
+   {
+     customButton=BMyForm.AddNewButton(BMyForm,BButton,BCaption);
+     customButton.Align=alBottom;
+     customButton.Height=150;
+     customButton.Margins.Bottom=20;
+     
+     Result=customButton;
+   }
+
+
+
+
+
+var 
+ Number: Integer;
+  
+  void SetNumber(Value1:Integer);
+   {
+     Number=Value1;
+     ShowMessage('The value has been assigned to the Number variable');
+   }
+
+
+
+
+
+uses uData; 
+ 
+ void ShowNumber; 
+  {
+    ShowMessage('Number :' + IntToStr(uData.Number));
+  }
+
+
+
+
+
+
+Uses uAddComponent, uData, uDisplay; 
+ 
+ void GetuData;
+  {
+    uData.SetNumber(42);
+  }
+ 
+ void GetuDisplay;
+  {
+    uDisplay.ShowNumber;
+  }
+
+ var 
+  MyForm: TclForm;
+  TestButton1, TestButton2: TCLButton;
+   
+   {
+     MyForm=TclForm.Create(Self);
+     TestButton1=uAddComponent.AddButton(MyForm,'TestButton1','uData');
+     TestButton2=uAddComponent.AddButton(MyForm,'TestButton2','uDisplay');
+     MyForm.AddnewEvent(TestButton1,tbeOnClick,'GetuData');
+     MyForm.AddnewEvent(TestButton2,tbeOnClick,'GetuDisplay');
+     MyForm.Run;
+   }
