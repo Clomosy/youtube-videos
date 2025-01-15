@@ -1,0 +1,13 @@
+function Faktoriyel(N: Integer): Integer;
+ var
+  i: Integer;
+ {
+  Result = 1;
+  for I = 1 to N 
+    Result = Result * i;
+ }
+
+
+{
+ ShowMessage(Faktoriyel(7));
+}
