@@ -1,0 +1,28 @@
+var
+  GirilenSayi: Integer;
+  SayininTersi: Integer;
+
+function SayiTersiniBul(Sayi: Integer): Integer;
+var
+  TersSayi, Basamak: Integer;
+{
+  TersSayi = 0;
+
+  while (Sayi <> 0)
+  {
+    Basamak = Sayi mod 10;            
+    TersSayi = (TersSayi * 10) + Basamak; 
+    Sayi = Sayi div 10;               
+  }
+
+  Result = TersSayi;
+}
+
+
+{
+  GirilenSayi = 2356;
+
+  SayininTersi = SayiTersiniBul(GirilenSayi);
+
+  ShowMessage('Sayının tersi: ' + IntToStr(SayininTersi));
+}
