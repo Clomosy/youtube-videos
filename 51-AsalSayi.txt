@@ -1,0 +1,33 @@
+var 
+ Sayi: Integer;
+  function AsalMi(Sayi:Integer):Boolean;
+   var 
+    i:Integer;
+    Asal: Boolean;
+     {
+       if (Sayi<2)
+        Asal=False;
+       else
+        {
+          Asal=True; 
+           for i = 2 to Trunc(Sqrt(Sayi)) // 1*36 , 2*18, 3*12, 4*9, 6*6, 9*4, 12*3....
+            {
+              if(Sayi mod i==0)
+               {
+                 Asal=False;
+                 Break;
+               }
+            }
+        }
+        
+        Result=Asal;
+      }
+      
+      
+      {
+        Sayi=50;
+        if(AsalMi(Sayi))
+         ShowMessage(IntToStr(Sayi)+' bir asal sayidir.');
+        else 
+         ShowMessage(IntToStr(Sayi)+' bir asal sayi degildir.');
+      }
