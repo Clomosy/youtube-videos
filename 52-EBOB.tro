@@ -1,0 +1,28 @@
+var
+  Sayi1, Sayi2, Sonuc: Integer;
+
+function Ebob(Sayi1, Sayi2: Integer): Integer;
+{
+  // Euclid Algoritmasi
+  while (Sayi2 <> 0)
+  {
+    Result = Sayi2;
+    Sayi2 = Sayi1 mod Sayi2;
+    Sayi1 = Result;
+  }
+  Result = Sayi1; // EBOB degeri
+}
+
+
+{
+  Sayi1=48;
+  Sayi2=36;
+
+  if ((Sayi1 > 0) && (Sayi2 > 0))
+  {
+    Sonuc = Ebob(Sayi1, Sayi2);
+    ShowMessage('EBOB('+ IntToStr(Sayi1)+ ', '+ IntToStr(Sayi2)+ ') = '+ IntToStr(Sonuc));
+  }
+  else
+    ShowMessage('Lütfen pozitif tam sayilar girin.');
+}
