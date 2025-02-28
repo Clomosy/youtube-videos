@@ -1,0 +1,18 @@
+var
+  i, num: Integer;
+function Fibonacci(n: Integer): Integer;
+{
+  if (n <= 1)  
+    Result  = n
+  else
+    Result  = Fibonacci(n - 1) + Fibonacci(n - 2);
+}
+
+
+{
+  num=6;
+
+  ShowMessage('Özyinelemeli Fibonacci Sonuçları:');
+  for i  = 0 to num - 1
+    ShowMessage(IntToStr(Fibonacci(i))+ ' ');
+}
