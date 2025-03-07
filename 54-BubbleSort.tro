@@ -1,0 +1,85 @@
+var 
+ dizi : array[0..6] of Integer; 
+ i, j, n, temp: Integer;
+ str: String;
+ 
+ void BubbleSort;
+  {
+    n=Length(dizi);
+    for (i=0 to n-2)
+     {
+       for(j=0 to n-i-2)
+        {
+          if (dizi[j]>dizi[j+1])
+           {
+             temp=dizi[j];
+             dizi[j]=dizi[j+1];
+             dizi[j+1]=temp;
+           }
+        }
+     }
+  }
+  
+
+{
+  dizi[0]=12;
+  dizi[1]=11;
+  dizi[2]=13;
+  dizi[3]=5;
+  dizi[4]=1;
+  dizi[5]=7;
+  dizi[6]=9;
+  
+  str='Siralanmamis Dizi: ';
+  
+   for (i = 0 to Length(dizi)-1)
+    {
+      str=str+IntToStr(dizi[i])+' ';
+    }
+    
+    ShowMessage(str);
+    
+    
+    BubbleSort;
+    
+  str='Kucukten buyuge siralanmis dizi: ';
+  
+   for(i = 0 to Length(dizi)-1)
+    {
+      str=str+IntToStr(dizi[i])+' ';
+    }
+    
+     ShowMessage(str);
+     
+  str='Buyukten kucuge dogru siralanmis dizi: ';
+  
+   for (i=Length(dizi)-1 downto 0)
+    {
+      str=str+IntToStr(dizi[i])+' ';
+    }
+    
+    ShowMessage(str);
+ }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
