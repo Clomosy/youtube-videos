@@ -1,0 +1,36 @@
+var 
+ Dizi: Array[0..7] of Integer;
+ Min, Max : Integer;
+ 
+void MinMaxBul;
+var
+  I: Integer;
+{
+  Min = Dizi[0];
+  Max = Dizi[0];
+
+  for (i = 1 to High(Dizi))
+  {
+    if (Dizi[i] < Min) 
+      Min = Dizi[i];
+      
+    if (Dizi[I] > Max) 
+      Max = Dizi[i];
+  }
+}
+
+
+{
+   Dizi[0] = 111;
+   Dizi[1] = 45;
+   Dizi[2] = 3;
+   Dizi[3] = 67;
+   Dizi[4] = 89;
+   Dizi[5] = 23;
+   Dizi[6] = 14;
+   Dizi[7] = 56;
+
+  MinMaxBul;
+  ShowMessage('En küçük sayı: '+ IntToStr(Min));
+  ShowMessage('En büyük sayı: '+ IntToStr(Max));
+}
