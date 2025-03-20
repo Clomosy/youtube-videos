@@ -1,0 +1,39 @@
+var 
+ dizi: array [0..7] of Integer;
+ Kopya: Integer;
+
+void KopyaBul;
+var
+  I, J : Integer;
+{
+  Kopya = -1; 
+
+  for I = 0 to High(dizi) - 1
+  {
+    for J = I + 1 to High(dizi)
+    {
+      if dizi[I] == dizi[J] 
+      {
+        Kopya = dizi[I]; 
+        Exit;
+      }
+    }
+  }
+}
+
+{
+   dizi[0] = 3;
+   dizi[1] = 5;
+   dizi[2] = 7;
+   dizi[3] = 2;
+   dizi[4] = 8;
+   dizi[5] = 5;
+   dizi[6] = 9;
+   dizi[7] = 1;
+   
+  KopyaBul;
+  if Kopya <> -1
+    ShowMessage('Tekrar eden ilk eleman: '+ IntToStr(Kopya))
+  else
+    ShowMessage('Tekrar eden eleman bulunamadı.');
+}
