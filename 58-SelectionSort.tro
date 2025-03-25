@@ -1,0 +1,60 @@
+  var
+    Dizi: Array[0..6] of Integer;
+    i, j, minIdx, n, temp: Integer;
+    str: string;
+  
+  void SecimSiralamasi;
+  {
+      n = Length(Dizi);
+      for (i = 0 to n - 1)
+      {
+          minIdx = i;
+          for (j = i + 1 to n - 1)
+          {
+              if (Dizi[j] < Dizi[minIdx])
+              {
+                  minIdx = j;
+              }
+          }
+          
+          temp = Dizi[minIdx];
+          Dizi[minIdx] = Dizi[i];
+          Dizi[i] = temp;
+      }
+  }
+  
+  {
+    Dizi[0] = 12;
+    Dizi[1] = 11;
+    Dizi[2] = 13;
+    Dizi[3] = 5;
+    Dizi[4] = 1;
+    Dizi[5] = 7;
+    Dizi[6] = 9;
+  
+    str = 'Sıralanmamış dizi: ';
+    
+    for (i = 0 to Length(Dizi)-1)
+    {
+      str = str + IntToStr(Dizi[i]) + ' ';
+    }  
+    
+    ShowMessage(str);
+  
+    SecimSiralamasi;
+    str = 'Küçükten büyüğe sıralanmış dizi: ';
+  
+    for (i = 0 to Length(Dizi)-1)
+    {
+      str = str + IntToStr(Dizi[i]) + ' ';
+    }
+    ShowMessage(str);
+  
+    str = 'Büyükten küçüğe sıralanmış dizi: ';  
+    
+    for (i = Length(Dizi)-1 downto 0)
+    {
+      str = str + IntToStr(Dizi[i]) + ' ';
+    }
+    ShowMessage(str);
+  }
