@@ -1,0 +1,40 @@
+var 
+ Dizi: Array [0..5] of Integer;
+ ArananDeger, index: Integer;
+ 
+function DogrusalArama(hedef: Integer): Integer;
+var
+  i: Integer;
+{
+  for i = Low(Dizi) to High(Dizi)
+  {
+    if Dizi[i] == hedef
+    {
+      Result = i;  // Değer bulundu, indeksini döndür
+      Exit;
+    }
+  }
+  Result = -1;  // Değer bulunamadıysa -1 döndür
+}
+
+
+{
+
+  Dizi[0] = 10
+  Dizi[1] = 20;
+  Dizi[2] = 30;
+  Dizi[3] = 40;
+  Dizi[4] = 50;
+  Dizi[5] = 60;
+
+  ArananDeger=45;
+
+  index = DogrusalArama(ArananDeger);
+
+  if index <> -1
+    ShowMessage('Eleman '+ IntToStr(ArananDeger)+ ' indekste bulundu: '+ IntToStr(index));
+  else
+    ShowMessage('Eleman '+ IntToStr(ArananDeger)+ ' bulunamadı.');
+
+
+}
