@@ -1,0 +1,50 @@
+var 
+ Dizi : Array [0..6] of Integer;
+ ArananDeger, index : Integer;
+ 
+function IkiliArama(sol,sag, hedef: Integer): Integer;
+var
+  orta : Integer;
+{
+  while (sol <= sag)
+  {
+    orta = (sag + sol) div 2; // Ortadaki elemanı bul
+    
+    if Dizi[orta] == hedef
+     {
+        Result = orta;
+        Exit;  // Eleman bulunduysa indexi döndür
+     }
+    else if Dizi[orta] < hedef
+      sol = orta + 1  // Sağ yarıya bak
+    else
+      sag = orta - 1; // Sol yarıya bak
+  }
+
+  Result = -1;
+}
+
+
+ {
+   Dizi[0] = 1;
+   Dizi[1] = 3;
+   Dizi[2] = 5;
+   Dizi[3] = 7;
+   Dizi[4] = 9;
+   Dizi[5] = 11;
+   Dizi[6] = 13;
+
+   ArananDeger = 7; 
+   
+   index = IkiliArama(Low(Dizi), High(Dizi), ArananDeger);
+    
+    if index <> -1 
+     ShowMessage('Eleman ' + IntToStr(ArananDeger)+ ' dizide bulundu: '+ IntToStr(index));
+    else 
+     ShowMessage('Eleman ' + IntToStr(ArananDeger)+ ' bulunamadı.');
+ }
+
+ 
+ 
+ 
+ 
