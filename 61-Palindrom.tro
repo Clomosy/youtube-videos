@@ -1,0 +1,30 @@
+var 
+ KullaniciMetni: String;
+  
+  function PalindromMu(metin: String): Boolean;
+  var 
+   tersMetin: String; // k , ka, kaz, kaza, kazak 
+   i: Integer;
+   
+   {
+     metin = AnsiLowerCase(metin);
+     tersMetin = '';
+     
+     for (i = Length(metin) downto 1)
+      tersMetin = tersMetin + metin[i];
+      
+     Result = metin == tersMetin;
+   }
+   
+   
+   {
+     KullaniciMetni = 'ekran';
+     if PalindromMu(KullaniciMetni)
+      ShowMessage('Girdiğiniz metin bir palindromdur!');
+     else 
+      ShowMessage('Girdiğiniz metin bir palindrom değildir.');
+   }
+   
+   
+   
+  
